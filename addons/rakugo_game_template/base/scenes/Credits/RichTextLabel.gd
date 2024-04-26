@@ -1,5 +1,4 @@
-@tool
-extends Control
+extends RichTextLabel
 
 func _on_RichTextLabel_meta_clicked(meta:String):
 	if meta.begins_with("https://"):

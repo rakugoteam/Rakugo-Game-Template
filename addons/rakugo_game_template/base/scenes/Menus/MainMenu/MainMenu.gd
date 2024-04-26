@@ -3,8 +3,6 @@ extends Control
 
 
 @export_file("*.tscn") var game_scene_path : String
-
-@export var credits_packed_scene : PackedScene
 @export var version_number : String = '0.0.0'
 
 
@@ -26,6 +24,7 @@ var sub_menu
 
 @onready var menu_button_list = [play_button,option_button,credit_button,exit_button]
 @onready var option_menu = %OptionsContainer
+@onready var credit_menu = %CreditsContainer
 
 func load_scene(scene_path : String):
 	SceneLoader.load_scene(scene_path)
@@ -88,21 +87,10 @@ func _setup_options():
 			button.alignment = HORIZONTAL_ALIGNMENT_RIGHT
 
 
-func _setup_credits():
-	if credits_packed_scene == null:
-		%CreditsButton.hide()
-	else:
-		credits_scene = credits_packed_scene.instantiate()
-		credits_scene.hide()
-		if credits_scene.has_signal("end_reached"):
-			credits_scene.connect("end_reached", _on_credits_end_reached)
-		%CreditsContainer.call_deferred("add_child", credits_scene)
-
 func _ready():
 	_setup_for_web()
 	_setup_version_name()
 	_setup_options()
-	_setup_credits()
 	_setup_play()
 
 func _on_play_button_pressed():
@@ -112,15 +100,11 @@ func _on_options_button_pressed():
 	_open_sub_menu(option_menu)
 
 func _on_credits_button_pressed():
-	_open_sub_menu(credits_scene)
-	credits_scene.reset()
+	_open_sub_menu(credit_menu)
+
 
 func _on_exit_button_pressed():
 	get_tree().quit()
-
-func _on_credits_end_reached():
-	if sub_menu == credits_scene:
-		_close_sub_menu()
 
 func _on_back_button_pressed():
 	_close_sub_menu()

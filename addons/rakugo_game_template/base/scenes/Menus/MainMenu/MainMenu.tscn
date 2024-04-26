@@ -15,7 +15,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1")
-credits_packed_scene = ExtResource("3_5dhvp")
 
 [node name="UISoundController" type="Node" parent="."]
 script = ExtResource("6_bs342")
@@ -134,17 +133,12 @@ alignment = 0
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="CreditsContainer" type="MarginContainer" parent="."]
+[node name="CreditsContainer" parent="VBoxContainer/MarginContainer/HBoxContainer" instance=ExtResource("3_5dhvp")]
 unique_name_in_owner = true
 visible = false
-layout_mode = 0
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 32
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 32
+layout_mode = 2
+size_flags_horizontal = 3
+vertical_scroll_mode = 1
 
 [node name="FlowControlContainer" type="MarginContainer" parent="."]
 layout_mode = 0
