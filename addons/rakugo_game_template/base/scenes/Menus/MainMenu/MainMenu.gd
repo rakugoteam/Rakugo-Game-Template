@@ -5,11 +5,24 @@ extends Control
 @export_file("*.tscn") var game_scene_path : String
 @export var options_packed_scene : PackedScene
 @export var credits_packed_scene : PackedScene
-@export var version_name : String = '0.0.0'
+@export var version_number : String = '0.0.0'
 
 var options_scene
 var credits_scene
 var sub_menu
+
+# Position : margin
+@export_enum("Left","Right") var Template_position:String="Left"
+
+@onready var header_margin = $VBoxContainer/HeaderMargin
+@onready var menu_margin = $VBoxContainer/HBoxContainer/MenuMargin
+
+@onready var play_button = %PlayButton
+@onready var option_button = %OptionsButton
+@onready var credit_button = %CreditsButton
+@onready var exit_button = %ExitButton
+
+@onready var menu_button_list = [play_button,option_button,credit_button,exit_button]
 
 func load_scene(scene_path : String):
 	SceneLoader.load_scene(scene_path)
@@ -49,14 +62,25 @@ func _setup_for_web():
 		%ExitButton.hide()
 
 func _setup_version_name():
-	AppLog.version_opened(version_name)
-	$"%VersionNameLabel".text = "v%s" % version_name
+	AppLog.version_opened(version_number)
+	$"%VersionNumber".text = "version : %s" % version_number
 
 func _setup_play():
 	if game_scene_path.is_empty():
 		%PlayButton.hide()
 
 func _setup_options():
+	
+	
+	if Template_position=="Right" :
+		header_margin.size_flags_horizontal  = SIZE_SHRINK_END
+		#menu_margin.size_flags_horizontal = SIZE_SHRINK_END
+		var hbox = $VBoxContainer/MarginContainer/HBoxContainer
+		hbox.move_child(hbox.get_child(1),0)
+		#hbox.layout_direction=LAYOUT_DIRECTION_RTL
+		for button in menu_button_list:
+			button.alignment = HORIZONTAL_ALIGNMENT_RIGHT
+
 	if options_packed_scene == null:
 		%OptionsButton.hide()
 	else:

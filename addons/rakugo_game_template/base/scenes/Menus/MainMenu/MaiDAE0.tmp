@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c6k5nnpbypshi"]
+[gd_scene load_steps=7 format=3 uid="uid://c6k5nnpbypshi"]
 
 [ext_resource type="Script" path="res://addons/rakugo_game_template/base/scenes/Menus/MainMenu/MainMenu.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://bvwl11s2p0hd" path="res://addons/rakugo_game_template/base/scenes/Menus/OptionsMenu/MasterOptionsMenu.tscn" id="2_67m86"]
@@ -6,10 +6,6 @@
 [ext_resource type="Script" path="res://addons/rakugo_game_template/base/scripts/CaptureFocus.gd" id="4_l1ebe"]
 [ext_resource type="PackedScene" uid="uid://bkcsjsk2ciff" path="res://addons/rakugo_game_template/base/scenes/MusicPlayers/BackgroundMusicPlayer.tscn" id="4_w8sbm"]
 [ext_resource type="Script" path="res://addons/rakugo_game_template/base/scripts/UISoundController.gd" id="6_bs342"]
-[ext_resource type="PackedScene" uid="uid://dp3rgqaehb3xu" path="res://addons/rakugo_game_template/base/scenes/Menus/OptionsMenu/Input/InputOptionsMenu.tscn" id="7_273u6"]
-[ext_resource type="Script" path="res://addons/rakugo_game_template/base/scenes/Menus/OptionsMenu/MasterOptionsMenu.gd" id="7_vfyc1"]
-[ext_resource type="PackedScene" uid="uid://c8vnncjwqcpab" path="res://addons/rakugo_game_template/base/scenes/Menus/OptionsMenu/Audio/AudioOptionsMenu.tscn" id="8_8qrqo"]
-[ext_resource type="PackedScene" uid="uid://b2numvphf2kau" path="res://addons/rakugo_game_template/base/scenes/Menus/OptionsMenu/Video/VideoOptionsMenu.tscn" id="9_i3n6b"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -38,7 +34,7 @@ grow_vertical = 2
 expand_mode = 1
 stretch_mode = 5
 
-[node name="VersionNumber" type="Label" parent="."]
+[node name="VersionNameLabel" type="Label" parent="."]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 3
@@ -46,15 +42,16 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -88.0
-offset_top = -26.0
+offset_left = -96.0
+offset_top = -33.0
+offset_right = -8.0
+offset_bottom = -7.0
 grow_horizontal = 0
 grow_vertical = 0
-theme_override_font_sizes/font_size = 8
 horizontal_alignment = 2
-vertical_alignment = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="MenuContainer" type="MarginContainer" parent="."]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -62,44 +59,39 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HeaderMargin" type="MarginContainer" parent="VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuContainer"]
 layout_mode = 2
-size_flags_horizontal = 0
-theme_override_constants/margin_left = 64
+
+[node name="HeaderMargin" type="MarginContainer" parent="MenuContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
 theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 64
 
-[node name="TitlesContainer" type="VBoxContainer" parent="VBoxContainer/HeaderMargin"]
+[node name="TitlesContainer" type="VBoxContainer" parent="MenuContainer/VBoxContainer/HeaderMargin"]
 layout_mode = 2
+theme_override_constants/separation = 12
 
-[node name="Game_Title" type="Label" parent="VBoxContainer/HeaderMargin/TitlesContainer"]
+[node name="Game_Title" type="Label" parent="MenuContainer/VBoxContainer/HeaderMargin/TitlesContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
 text = "Game Title"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Game_SubTitle" type="Label" parent="VBoxContainer/HeaderMargin/TitlesContainer"]
+[node name="Game_SubTitle" type="Label" parent="MenuContainer/VBoxContainer/HeaderMargin/TitlesContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Game Subtitle"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+[node name="MenuMargin" type="MarginContainer" parent="MenuContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/margin_left = 32
+size_flags_vertical = 6
 theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 16
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/separation = 32
-
-[node name="MenuButtons" type="VBoxContainer" parent="VBoxContainer/MarginContainer/HBoxContainer"]
+[node name="MenuButtons" type="VBoxContainer" parent="MenuContainer/VBoxContainer/MenuMargin"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
@@ -107,68 +99,43 @@ theme_override_constants/separation = 16
 alignment = 1
 script = ExtResource("4_l1ebe")
 
-[node name="PlayButton" type="Button" parent="VBoxContainer/MarginContainer/HBoxContainer/MenuButtons"]
+[node name="PlayButton" type="Button" parent="MenuContainer/VBoxContainer/MenuMargin/MenuButtons"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(128, 40)
 layout_mode = 2
 text = "Play"
-alignment = 0
 
-[node name="OptionsButton" type="Button" parent="VBoxContainer/MarginContainer/HBoxContainer/MenuButtons"]
+[node name="OptionsButton" type="Button" parent="MenuContainer/VBoxContainer/MenuMargin/MenuButtons"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(128, 40)
 layout_mode = 2
 text = "Options
 "
-alignment = 0
 
-[node name="CreditsButton" type="Button" parent="VBoxContainer/MarginContainer/HBoxContainer/MenuButtons"]
+[node name="CreditsButton" type="Button" parent="MenuContainer/VBoxContainer/MenuMargin/MenuButtons"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(128, 40)
 layout_mode = 2
 text = "Credits"
-alignment = 0
 
-[node name="ExitButton" type="Button" parent="VBoxContainer/MarginContainer/HBoxContainer/MenuButtons"]
+[node name="ExitButton" type="Button" parent="MenuContainer/VBoxContainer/MenuMargin/MenuButtons"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(128, 40)
 layout_mode = 2
 text = "Exit"
-alignment = 0
-
-[node name="TabContainer" type="TabContainer" parent="VBoxContainer/MarginContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-script = ExtResource("7_vfyc1")
-
-[node name="Controls" parent="VBoxContainer/MarginContainer/HBoxContainer/TabContainer" instance=ExtResource("7_273u6")]
-layout_mode = 2
-
-[node name="Audio" parent="VBoxContainer/MarginContainer/HBoxContainer/TabContainer" instance=ExtResource("8_8qrqo")]
-visible = false
-layout_mode = 2
-
-[node name="Video" parent="VBoxContainer/MarginContainer/HBoxContainer/TabContainer" instance=ExtResource("9_i3n6b")]
-visible = false
-layout_mode = 2
 
 [node name="OptionsContainer" type="MarginContainer" parent="."]
 unique_name_in_owner = true
-visible = false
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.14375
-anchor_top = 0.236111
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-metadata/_edit_use_anchors_ = true
 
 [node name="CreditsContainer" type="MarginContainer" parent="."]
 unique_name_in_owner = true
-visible = false
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -205,8 +172,8 @@ offset_right = 62.0
 grow_vertical = 0
 text = "Back"
 
-[connection signal="pressed" from="VBoxContainer/MarginContainer/HBoxContainer/MenuButtons/PlayButton" to="." method="_on_play_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/MarginContainer/HBoxContainer/MenuButtons/OptionsButton" to="." method="_on_options_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/MarginContainer/HBoxContainer/MenuButtons/CreditsButton" to="." method="_on_credits_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/MarginContainer/HBoxContainer/MenuButtons/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="MenuContainer/VBoxContainer/MenuMargin/MenuButtons/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="MenuContainer/VBoxContainer/MenuMargin/MenuButtons/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="MenuContainer/VBoxContainer/MenuMargin/MenuButtons/CreditsButton" to="." method="_on_credits_button_pressed"]
+[connection signal="pressed" from="MenuContainer/VBoxContainer/MenuMargin/MenuButtons/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="FlowControlContainer/FlowControl/BackButton" to="." method="_on_back_button_pressed"]
