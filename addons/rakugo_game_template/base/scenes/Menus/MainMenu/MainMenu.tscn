@@ -1,15 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://c6k5nnpbypshi"]
+[gd_scene load_steps=7 format=3 uid="uid://c6k5nnpbypshi"]
 
 [ext_resource type="Script" path="res://addons/rakugo_game_template/base/scenes/Menus/MainMenu/MainMenu.gd" id="1"]
-[ext_resource type="PackedScene" uid="uid://bvwl11s2p0hd" path="res://addons/rakugo_game_template/base/scenes/Menus/OptionsMenu/MasterOptionsMenu.tscn" id="2_67m86"]
 [ext_resource type="PackedScene" uid="uid://t2dui8ppm3a4" path="res://addons/rakugo_game_template/base/scenes/Credits/Credits.tscn" id="3_5dhvp"]
 [ext_resource type="Script" path="res://addons/rakugo_game_template/base/scripts/CaptureFocus.gd" id="4_l1ebe"]
 [ext_resource type="PackedScene" uid="uid://bkcsjsk2ciff" path="res://addons/rakugo_game_template/base/scenes/MusicPlayers/BackgroundMusicPlayer.tscn" id="4_w8sbm"]
 [ext_resource type="Script" path="res://addons/rakugo_game_template/base/scripts/UISoundController.gd" id="6_bs342"]
-[ext_resource type="PackedScene" uid="uid://dp3rgqaehb3xu" path="res://addons/rakugo_game_template/base/scenes/Menus/OptionsMenu/Input/InputOptionsMenu.tscn" id="7_273u6"]
-[ext_resource type="Script" path="res://addons/rakugo_game_template/base/scenes/Menus/OptionsMenu/MasterOptionsMenu.gd" id="7_vfyc1"]
-[ext_resource type="PackedScene" uid="uid://c8vnncjwqcpab" path="res://addons/rakugo_game_template/base/scenes/Menus/OptionsMenu/Audio/AudioOptionsMenu.tscn" id="8_8qrqo"]
-[ext_resource type="PackedScene" uid="uid://b2numvphf2kau" path="res://addons/rakugo_game_template/base/scenes/Menus/OptionsMenu/Video/VideoOptionsMenu.tscn" id="9_i3n6b"]
+[ext_resource type="PackedScene" uid="uid://djnvp4x64ukay" path="res://addons/rakugo_game_template/base/scenes/Menus/OptionsMenu/OptionsContainer.tscn" id="6_ky335"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -19,9 +15,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1")
-options_packed_scene = ExtResource("2_67m86")
 credits_packed_scene = ExtResource("3_5dhvp")
-Template_position = "Right"
 
 [node name="UISoundController" type="Node" parent="."]
 script = ExtResource("6_bs342")
@@ -136,35 +130,9 @@ layout_mode = 2
 text = "Exit"
 alignment = 0
 
-[node name="TabContainer" type="TabContainer" parent="VBoxContainer/MarginContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-script = ExtResource("7_vfyc1")
-
-[node name="Controls" parent="VBoxContainer/MarginContainer/HBoxContainer/TabContainer" instance=ExtResource("7_273u6")]
-layout_mode = 2
-
-[node name="Audio" parent="VBoxContainer/MarginContainer/HBoxContainer/TabContainer" instance=ExtResource("8_8qrqo")]
-visible = false
-layout_mode = 2
-
-[node name="Video" parent="VBoxContainer/MarginContainer/HBoxContainer/TabContainer" instance=ExtResource("9_i3n6b")]
-visible = false
-layout_mode = 2
-
-[node name="OptionsContainer" type="MarginContainer" parent="."]
+[node name="OptionsContainer" parent="VBoxContainer/MarginContainer/HBoxContainer" instance=ExtResource("6_ky335")]
 unique_name_in_owner = true
-visible = false
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.14375
-anchor_top = 0.236111
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-metadata/_edit_use_anchors_ = true
+layout_mode = 2
 
 [node name="CreditsContainer" type="MarginContainer" parent="."]
 unique_name_in_owner = true

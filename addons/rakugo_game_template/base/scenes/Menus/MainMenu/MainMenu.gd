@@ -3,11 +3,11 @@ extends Control
 
 
 @export_file("*.tscn") var game_scene_path : String
-@export var options_packed_scene : PackedScene
+
 @export var credits_packed_scene : PackedScene
 @export var version_number : String = '0.0.0'
 
-var options_scene
+
 var credits_scene
 var sub_menu
 
@@ -15,14 +15,17 @@ var sub_menu
 @export_enum("Left","Right") var Template_position:String="Left"
 
 @onready var header_margin = $VBoxContainer/HeaderMargin
-@onready var menu_margin = $VBoxContainer/HBoxContainer/MenuMargin
+
+
 
 @onready var play_button = %PlayButton
 @onready var option_button = %OptionsButton
 @onready var credit_button = %CreditsButton
 @onready var exit_button = %ExitButton
 
+
 @onready var menu_button_list = [play_button,option_button,credit_button,exit_button]
+@onready var option_menu = %OptionsContainer
 
 func load_scene(scene_path : String):
 	SceneLoader.load_scene(scene_path)
@@ -31,18 +34,21 @@ func play_game():
 	SceneLoader.load_scene(game_scene_path)
 
 func _open_sub_menu(menu : Control):
+	if sub_menu == menu:
+		sub_menu.visible = !sub_menu.visible
+		return
+	if sub_menu != null:
+		sub_menu.hide()
 	sub_menu = menu
 	sub_menu.show()
-	%BackButton.show()
-	%MenuContainer.hide()
+
 
 func _close_sub_menu():
 	if sub_menu == null:
 		return
 	sub_menu.hide()
 	sub_menu = null
-	%BackButton.hide()
-	%MenuContainer.show()
+
 
 func _event_is_mouse_button_released(event : InputEvent):
 	return event is InputEventMouseButton and not event.is_pressed()
@@ -77,16 +83,10 @@ func _setup_options():
 		#menu_margin.size_flags_horizontal = SIZE_SHRINK_END
 		var hbox = $VBoxContainer/MarginContainer/HBoxContainer
 		hbox.move_child(hbox.get_child(1),0)
-		#hbox.layout_direction=LAYOUT_DIRECTION_RTL
+		hbox.alignment = BoxContainer.ALIGNMENT_END
 		for button in menu_button_list:
 			button.alignment = HORIZONTAL_ALIGNMENT_RIGHT
 
-	if options_packed_scene == null:
-		%OptionsButton.hide()
-	else:
-		options_scene = options_packed_scene.instantiate()
-		options_scene.hide()
-		%OptionsContainer.call_deferred("add_child", options_scene)
 
 func _setup_credits():
 	if credits_packed_scene == null:
@@ -109,7 +109,7 @@ func _on_play_button_pressed():
 	play_game()
 
 func _on_options_button_pressed():
-	_open_sub_menu(options_scene)
+	_open_sub_menu(option_menu)
 
 func _on_credits_button_pressed():
 	_open_sub_menu(credits_scene)
