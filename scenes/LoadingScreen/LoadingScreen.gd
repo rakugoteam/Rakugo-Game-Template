@@ -6,6 +6,7 @@ const CONTINUE_LABEL_TEXT = "Press any key to continue..."
 @onready var status_label = %StatusLabel
 @onready var continue_label = %ContinueLabel
 @onready var progress_bar = %ProgressBar
+@onready var flash_label = %AnimationPlayer
 
 func _show_scene_switching_error_message():
 	if %ErrorMessage.visible:
@@ -25,7 +26,7 @@ func _process(_delta):
 				progress_bar.value = progress_bar.max_value
 				status_label.text = LOADING_COMPLETE_TEXT
 				continue_label.text = CONTINUE_LABEL_TEXT
-				continue_label.show()
+				_flash_continue_label()
 			set_process(false)
 		ResourceLoader.THREAD_LOAD_FAILED:
 			%ErrorMessage.dialog_text = "Loading Error: %d" % status
@@ -34,3 +35,7 @@ func _process(_delta):
 		ResourceLoader.THREAD_LOAD_INVALID_RESOURCE:
 			%ErrorMessage.hide()
 			set_process(false)
+
+func _flash_continue_label ():
+	continue_label.show()
+	flash_label.play("Flash")
