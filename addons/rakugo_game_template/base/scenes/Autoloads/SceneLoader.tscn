@@ -4,4 +4,3 @@
 
 [node name="SceneLoader" type="Node"]
 script = ExtResource("1_l0dhx")
-loading_screen_path = "res://addons/rakugo_game_template/base/scenes/LoadingScreen/LoadingScreen.tscn"

@@ -8,10 +8,15 @@
 
 config_version=5
 
+[addons]
+
+rakugo_game_template/loading_scene_path="res://scenes/LoadingScreen/LoadingScreen.tscn"
+rakugo_game_template/first_scene_to_load_path="res://scenes/MainMenu/MainMenu.tscn"
+
 [application]
 
 config/name="Rakugo Game Template"
-run/main_scene="res://main.tscn"
+run/main_scene="res://scenes/LoadingScreen/LoadingScreen.tscn"
 config/features=PackedStringArray("4.2")
 config/icon="res://icon.svg"
 

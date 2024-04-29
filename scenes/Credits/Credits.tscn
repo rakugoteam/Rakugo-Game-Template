@@ -1,6 +1,7 @@
 [gd_scene load_steps=2 format=3 uid="uid://t2dui8ppm3a4"]
 
-[ext_resource type="Script" path="res://addons/rakugo_game_template/base/scenes/Credits/RichTextLabel.gd" id="2_clwmv"]
+[ext_resource type="Script" path="res://scenes/Credits/RichTextLabel.gd" id="2_clwmv"]
+
 
 [node name="Credits" type="ScrollContainer"]
 anchors_preset = 15

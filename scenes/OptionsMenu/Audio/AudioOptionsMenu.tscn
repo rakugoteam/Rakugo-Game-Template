@@ -1,8 +1,9 @@
 [gd_scene load_steps=4 format=3 uid="uid://c8vnncjwqcpab"]
 
-[ext_resource type="Script" path="res://addons/rakugo_game_template/base/scenes/Menus/OptionsMenu/Audio/AudioOptionsMenu.gd" id="1"]
-[ext_resource type="PackedScene" uid="uid://bosy6wwf0vleq" path="res://addons/rakugo_game_template/base/scenes/Menus/OptionsMenu/Audio/AudioControl/AudioControl.tscn" id="2_0jh6g"]
+[ext_resource type="Script" path="res://scenes/OptionsMenu/Audio/AudioOptionsMenu.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://bosy6wwf0vleq" path="res://scenes/OptionsMenu/Audio/AudioControl/AudioControl.tscn" id="2_0jh6g"]
 [ext_resource type="Script" path="res://addons/rakugo_game_template/base/scripts/CaptureFocus.gd" id="3_dtraq"]
+
 
 [node name="Audio" type="MarginContainer"]
 custom_minimum_size = Vector2(305, 0)

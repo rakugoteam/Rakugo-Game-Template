@@ -4,11 +4,13 @@ extends Node
 
 signal scene_loaded
 
-@export_file("*.tscn") var loading_screen_path : String : set = set_loading_screen
 var _loading_screen : PackedScene
 var _scene_path : String
 var _loaded_resource : Resource
+
+var _scene_loading_complete : bool = false
 var _background_loading : bool
+var _wait_after_load : bool = true
 
 func _check_scene_path() -> bool:
 	if _scene_path == null or _scene_path == "":
@@ -43,17 +45,16 @@ func change_scene_to_resource() -> void:
 		get_tree().quit()
 
 func change_scene_to_loading_screen() -> void:
-	var err = get_tree().change_scene_to_packed(_loading_screen)
+	var err = get_tree().call_deferred("change_scene_to_packed", _loading_screen)
 	if err:
 		push_error("failed to change scenes to loading screen: %d" % err)
 		get_tree().quit()
 
 func set_loading_screen(value : String) -> void:
-	loading_screen_path = value
-	if loading_screen_path == "":
+	if value == "":
 		push_warning("loading screen path is empty")
 		return
-	_loading_screen = load(loading_screen_path)
+	_loading_screen = load(value)
 
 func is_loading_scene(check_scene_path) -> bool:
 	return check_scene_path == _scene_path
@@ -70,31 +71,60 @@ func _check_loading_screen() -> bool:
 func reload_current_scene() -> void:
 	get_tree().reload_current_scene()
 
-func load_scene(scene_path : String, in_background : bool = false) -> void:
+func load_scene_in_background(scene_path : String):
 	if scene_path == null or scene_path.is_empty():
 		push_error("no path given to load")
 		return
+	_scene_path = scene_path
+	_scene_loading_complete = false
+	_background_loading = true
 	if ResourceLoader.has_cached(scene_path):
+		_scene_loading_complete = true
 		call_deferred("emit_signal", "scene_loaded")
 		return
-	_scene_path = scene_path
-	_background_loading = in_background
 	ResourceLoader.load_threaded_request(_scene_path)
-	if _background_loading or not _check_loading_screen():
-		set_process(true)
-	else:
-		change_scene_to_loading_screen()
+	set_process(true)
+
+func change_scene(scene_path : String, wait_after_load : bool = true) -> void:
+	if scene_path == null or scene_path.is_empty():
+		push_error("no path given to load")
+	_scene_path = scene_path
+	_scene_loading_complete = false
+	_wait_after_load = wait_after_load
+	if ResourceLoader.has_cached(scene_path):
+		_scene_loading_complete = true
+		call_deferred("emit_signal", "scene_loaded")
+		if _wait_after_load:
+			change_scene_to_loading_screen()
+			return
+		change_scene_to_resource()
+		return
+	change_scene_to_loading_screen()
+	ResourceLoader.load_threaded_request(_scene_path)
+	set_process(true)
 
 func _ready():
 	set_process(false)
+	set_loading_screen(ProjectSettings.get_setting("addons/rakugo_game_template/loading_scene_path"))
+	change_scene(ProjectSettings.get_setting("addons/rakugo_game_template/first_scene_to_load_path"))
 
 func _process(_delta):
-	var status = get_status()
-	match(status):
-		ResourceLoader.THREAD_LOAD_INVALID_RESOURCE, ResourceLoader.THREAD_LOAD_FAILED:
-			set_process(false)
-		ResourceLoader.THREAD_LOAD_LOADED:
-			emit_signal("scene_loaded")
-			set_process(false)
-			if not _background_loading:
-				change_scene_to_resource()
+	if not _scene_loading_complete:
+		var status = get_status()
+		match(status):
+			ResourceLoader.THREAD_LOAD_INVALID_RESOURCE, ResourceLoader.THREAD_LOAD_FAILED:
+				set_process(false)
+			ResourceLoader.THREAD_LOAD_LOADED:
+				_scene_loading_complete = true
+				emit_signal("scene_loaded")
+				if _background_loading:
+					set_process(false)
+					return
+				elif not _wait_after_load:
+					change_scene_to_resource()
+					set_process(false)
+					return
+	elif _wait_after_load and Input.is_anything_pressed():
+		change_scene_to_resource()
+		set_process(false)
+		return

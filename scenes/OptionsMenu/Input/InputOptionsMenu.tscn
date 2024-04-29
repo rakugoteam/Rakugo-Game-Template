@@ -1,9 +1,10 @@
 [gd_scene load_steps=5 format=3 uid="uid://dp3rgqaehb3xu"]
 
-[ext_resource type="Script" path="res://addons/rakugo_game_template/base/scenes/Menus/OptionsMenu/Input/InputOptionsMenu.gd" id="1"]
+[ext_resource type="Script" path="res://scenes/OptionsMenu/Input/InputOptionsMenu.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://beg4vmqhsx6ak" path="res://icon.svg" id="2_2vovj"]
 [ext_resource type="Script" path="res://addons/rakugo_game_template/base/scripts/CaptureFocus.gd" id="2_wft4x"]
-[ext_resource type="Script" path="res://addons/rakugo_game_template/base/scenes/Menus/OptionsMenu/Input/KeyAssignmentDialog.gd" id="3_wsh2h"]
+[ext_resource type="Script" path="res://scenes/OptionsMenu/Input/KeyAssignmentDialog.gd" id="3_wsh2h"]
+
 
 [node name="Controls" type="MarginContainer"]
 anchors_preset = 15

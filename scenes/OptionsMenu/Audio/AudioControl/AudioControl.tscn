@@ -1,6 +1,7 @@
 [gd_scene load_steps=2 format=3 uid="uid://bosy6wwf0vleq"]
 
-[ext_resource type="Script" path="res://addons/rakugo_game_template/base/scenes/Menus/OptionsMenu/Audio/AudioControl/AudioControl.gd" id="1_caab0"]
+[ext_resource type="Script" path="res://scenes/OptionsMenu/Audio/AudioControl/AudioControl.gd" id="1_caab0"]
+
 
 [node name="AudioControl" type="HBoxContainer"]
 offset_right = 40.0

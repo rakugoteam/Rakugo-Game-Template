@@ -1,8 +1,9 @@
 [gd_scene load_steps=4 format=3 uid="uid://vh1ucj2rfbby"]
 
-[ext_resource type="Script" path="res://addons/rakugo_game_template/base/scenes/Menus/OptionsMenu/OptionsMenu.gd" id="2"]
-[ext_resource type="PackedScene" uid="uid://bosy6wwf0vleq" path="res://addons/rakugo_game_template/base/scenes/Menus/OptionsMenu/Audio/AudioControl/AudioControl.tscn" id="2_xrxr1"]
+[ext_resource type="Script" path="res://scenes/OptionsMenu/OptionsMenu.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://bosy6wwf0vleq" path="res://scenes/OptionsMenu/Audio/AudioControl/AudioControl.tscn" id="2_xrxr1"]
 [ext_resource type="Script" path="res://addons/rakugo_game_template/base/scripts/CaptureFocus.gd" id="3_xfg0m"]
+
 
 [node name="OptionsMenu" type="VBoxContainer"]
 custom_minimum_size = Vector2(400, 260)
