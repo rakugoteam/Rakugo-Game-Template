@@ -9,7 +9,7 @@ const first_game_scene_setting_path = rakugo_game_template_setting_path + "/firs
 
 func _enter_tree():
 	add_autoload_singleton("AppConfig", "res://addons/rakugo_game_template/base/scenes/Autoloads/AppConfig.tscn")
-	add_autoload_singleton("SceneLoader", "res://addons/rakugo_game_template/base/scenes/Autoloads/SceneLoader.tscn")
+	add_autoload_singleton("SceneLoader", "res://addons/rakugo_game_template/base/scenes/Autoloads/SceneLoader.gd")
 	add_autoload_singleton("ProjectMusicController", "res://addons/rakugo_game_template/base/scenes/Autoloads/ProjectMusicController.tscn")
 	add_autoload_singleton("ProjectUISoundController", "res://addons/rakugo_game_template/base/scenes/Autoloads/ProjectUISoundController.tscn")
 

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Rakugo Game Template"
-run/main_scene="res://scenes/LoadingScreen/LoadingScreen.tscn"
+run/main_scene="res://scenes/Bootstrap/bootstrap.tscn"
 config/features=PackedStringArray("4.2")
 config/icon="res://icon.svg"
 addons/rakugo_game_template/loading_scene_path="res://scenes/LoadingScreen/LoadingScreen.tscn"
@@ -21,7 +21,7 @@ addons/rakugo_game_template/first_game_scene_path="res://scenes/Game/game.tscn"
 [autoload]
 
 AppConfig="*res://addons/rakugo_game_template/base/scenes/Autoloads/AppConfig.tscn"
-SceneLoader="*res://addons/rakugo_game_template/base/scenes/Autoloads/SceneLoader.tscn"
+SceneLoader="*res://addons/rakugo_game_template/base/scenes/Autoloads/SceneLoader.gd"
 ProjectMusicController="*res://addons/rakugo_game_template/base/scenes/Autoloads/ProjectMusicController.tscn"
 ProjectUISoundController="*res://addons/rakugo_game_template/base/scenes/Autoloads/ProjectUISoundController.tscn"
 
