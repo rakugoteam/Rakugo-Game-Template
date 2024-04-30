@@ -14,6 +14,16 @@ func _show_scene_switching_error_message():
 	%ErrorMessage.dialog_text = "Loading Error: Failed to switch scenes."
 	%ErrorMessage.popup_centered()
 
+func _ready():
+	if SceneLoader._scene_loading_complete:
+		progress_bar.value = progress_bar.max_value
+		status_label.text = LOADING_COMPLETE_TEXT
+		continue_label.text = CONTINUE_LABEL_TEXT
+		_flash_continue_label()
+		set_process(false)
+		return
+	set_process(true)
+
 func _process(_delta):
 	var status = SceneLoader.get_status()
 	match(status):

@@ -1,78 +1,55 @@
 extends Control
 
-@export var options_packed_scene : PackedScene
-@export_file("*.tscn") var main_menu_scene : String
+const confirm_menu = "Go back to Main Menu ?"
+const confirm_restart = "Restart the Game ?"
+const confirm_quit = "Quit the Game ?"
 
-var popup_open
+@onready var confirm_popup = %ConfirmationDialog
+@onready var sub_menu_container = %SubMenuContainer
 
-func close_popup():
-	if popup_open != null:
-		popup_open.hide()
-		popup_open = null
-
-func close_options_menu():
-	%SubMenuContainer.hide()
-	%MenuContainer.show()
-
-func open_options_menu():
-	%SubMenuContainer.show()
-	%MenuContainer.hide()
-
-func _unhandled_input(event):
-	if event.is_action_pressed("ui_cancel"):
-		if popup_open != null:
-			close_popup()
-		elif %SubMenuContainer.visible:
-			close_options_menu()
-		else:
-			InGameMenuController.close_menu()
-
-func _setup_options():
-	if options_packed_scene == null:
-		%OptionsButton.hide()
-	else:
-		var options_scene = options_packed_scene.instantiate()
-		%OptionsContainer.call_deferred("add_child", options_scene)
-
-func _setup_main_menu():
-	if main_menu_scene.is_empty():
-		%MainMenuButton.hide()
+func _process(_delta):
+	if visible and Input.is_action_just_pressed("ui_cancel"):
+		if sub_menu_container.visible:
+			sub_menu_container.visible = false
+		
+		_on_resume_button_pressed()
 
 func _ready():
 	if OS.has_feature("web"):
 		%ExitButton.hide()
-	_setup_options()
-	_setup_main_menu()
+
+	set_process(false)
 
 func _on_resume_button_pressed():
-	InGameMenuController.close_menu()
+	hide()
+	set_process(false)
+
+func show_confirm_popup(confirm_text:String, on_ok_pressed:Callable):
+	confirm_popup.dialog_text = confirm_text
+	confirm_popup.get_ok_button().pressed.connect(on_ok_pressed)
+	confirm_popup.popup()
 
 func _on_restart_button_pressed():
-	%ConfirmRestart.popup_centered()
-	popup_open = %ConfirmRestart
+	show_confirm_popup(confirm_restart, _on_confirm_restart_confirmed)
 
 func _on_options_button_pressed():
-	open_options_menu()
+	sub_menu_container.show()
 
 func _on_main_menu_button_pressed():
-	%ConfirmMainMenu.popup_centered()
-	popup_open = %ConfirmMainMenu
+	show_confirm_popup(confirm_menu, _on_confirm_main_menu_confirmed)
 
 func _on_exit_button_pressed():
-	%ConfirmExit.popup_centered()
-	popup_open = %ConfirmExit
+	show_confirm_popup(confirm_quit, _on_confirm_exit_confirmed)
 
 func _on_confirm_restart_confirmed():
-	SceneLoader.reload_current_scene()
-	InGameMenuController.close_menu()
+	prints(name, get_tree().current_scene.scene_file_path)
+	SceneLoader.change_scene(get_tree().current_scene.scene_file_path)
 
 func _on_confirm_main_menu_confirmed():
-	SceneLoader.load_scene(main_menu_scene)
-	InGameMenuController.close_menu()
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	SceneLoader.change_scene(ProjectSettings.get_setting(RakugoGameTemplate.main_menu_setting_path))
 
 func _on_confirm_exit_confirmed():
 	get_tree().quit()
 
 func _on_back_button_pressed():
-	close_options_menu()
+	sub_menu_container.hide()

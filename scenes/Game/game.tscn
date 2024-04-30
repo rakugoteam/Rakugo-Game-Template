@@ -9,6 +9,7 @@ script = ExtResource("1_o2piy")
 [node name="GUI" type="CanvasLayer" parent="."]
 
 [node name="PauseMenu" parent="GUI" instance=ExtResource("2_hcope")]
+unique_name_in_owner = true
 visible = false
 
 [node name="RemoveMe" type="VBoxContainer" parent="."]

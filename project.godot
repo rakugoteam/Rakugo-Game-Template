@@ -15,8 +15,8 @@ run/main_scene="res://scenes/Bootstrap/bootstrap.tscn"
 config/features=PackedStringArray("4.2")
 config/icon="res://icon.svg"
 addons/rakugo_game_template/loading_scene_path="res://scenes/LoadingScreen/LoadingScreen.tscn"
-addons/rakugo_game_template/first_scene_to_load_path="res://scenes/MainMenu/MainMenu.tscn"
 addons/rakugo_game_template/first_game_scene_path="res://scenes/Game/game.tscn"
+addons/rakugo_game_template/main_menu_path="res://scenes/MainMenu/MainMenu.tscn"
 
 [autoload]
 

@@ -4,4 +4,4 @@ extends Node
 #you can use this scene to show your splashscreen
 
 func _ready():
-	SceneLoader.change_scene(ProjectSettings.get_setting(RakugoGameTemplate.first_scene_to_load_path))
+	SceneLoader.change_scene(ProjectSettings.get_setting(RakugoGameTemplate.main_menu_setting_path))
