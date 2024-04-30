@@ -1,4 +1,4 @@
-extends CanvasLayer
+extends Control
 
 @export var options_packed_scene : PackedScene
 @export_file("*.tscn") var main_menu_scene : String
