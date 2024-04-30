@@ -1,10 +1,7 @@
 class_name MainMenu
 extends Control
 
-
-@export_file("*.tscn") var game_scene_path : String
 @export var version_number : String = '0.0.0'
-
 
 var credits_scene
 var sub_menu
@@ -14,23 +11,14 @@ var sub_menu
 
 @onready var header_margin = $VBoxContainer/HeaderMargin
 
-
-
 @onready var play_button = %PlayButton
 @onready var option_button = %OptionsButton
 @onready var credit_button = %CreditsButton
 @onready var exit_button = %ExitButton
-
-
 @onready var menu_button_list = [play_button,option_button,credit_button,exit_button]
+
 @onready var option_menu = %OptionsContainer
 @onready var credit_menu = %CreditsContainer
-
-func load_scene(scene_path : String):
-	SceneLoader.load_scene(scene_path)
-
-func play_game():
-	SceneLoader.load_scene(game_scene_path)
 
 func _open_sub_menu(menu : Control):
 	if sub_menu == menu:
@@ -62,20 +50,12 @@ func _input(event):
 	if event.is_action_released("ui_accept") and get_viewport().gui_get_focus_owner() == null:
 		%MenuButtons.focus_first()
 
-func _setup_for_web():
+func _ready():
 	if OS.has_feature("web"):
 		%ExitButton.hide()
-
-func _setup_version_name():
+		
 	AppLog.version_opened(version_number)
 	$"%VersionNumber".text = "version : %s" % version_number
-
-func _setup_play():
-	if game_scene_path.is_empty():
-		%PlayButton.hide()
-
-func _setup_options():
-	
 	
 	if Template_position=="Right" :
 		header_margin.size_flags_horizontal  = SIZE_SHRINK_END
@@ -85,16 +65,12 @@ func _setup_options():
 		hbox.alignment = BoxContainer.ALIGNMENT_END
 		for button in menu_button_list:
 			button.alignment = HORIZONTAL_ALIGNMENT_RIGHT
-
-
-func _ready():
-	_setup_for_web()
-	_setup_version_name()
-	_setup_options()
-	_setup_play()
+	
+	if ProjectSettings.get_setting(RakugoGameTemplate.loading_scene_setting_path).is_empty():
+		play_button.hide()
 
 func _on_play_button_pressed():
-	play_game()
+	SceneLoader.change_scene(ProjectSettings.get_setting(RakugoGameTemplate.first_game_scene_setting_path))
 
 func _on_options_button_pressed():
 	_open_sub_menu(option_menu)

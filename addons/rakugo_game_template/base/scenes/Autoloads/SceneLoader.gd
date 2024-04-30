@@ -105,8 +105,8 @@ func change_scene(scene_path : String, wait_after_load : bool = true) -> void:
 
 func _ready():
 	set_process(false)
-	set_loading_screen(ProjectSettings.get_setting("addons/rakugo_game_template/loading_scene_path"))
-	change_scene(ProjectSettings.get_setting("addons/rakugo_game_template/first_scene_to_load_path"))
+	set_loading_screen(ProjectSettings.get_setting(RakugoGameTemplate.loading_scene_setting_path))
+	change_scene(ProjectSettings.get_setting(RakugoGameTemplate.first_scene_to_load_path))
 
 func _process(_delta):
 	if not _scene_loading_complete:
