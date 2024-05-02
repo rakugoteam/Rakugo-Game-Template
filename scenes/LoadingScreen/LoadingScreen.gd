@@ -22,7 +22,6 @@ func _ready():
 		_flash_continue_label()
 		set_process(false)
 		return
-	set_process(true)
 
 func _process(_delta):
 	var status = SceneLoader.get_status()

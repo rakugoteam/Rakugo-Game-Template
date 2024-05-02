@@ -97,6 +97,7 @@ func change_scene(scene_path : String, wait_after_load : bool = true) -> void:
 		call_deferred("emit_signal", "scene_loaded")
 		if _wait_after_load:
 			change_scene_to_loading_screen()
+			set_process(true)
 			return
 		change_scene_to_resource()
 		return
