@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://d1flo1brh3p4c"]
+[gd_scene load_steps=6 format=3 uid="uid://d1flo1brh3p4c"]
 
 [ext_resource type="Script" path="res://scenes/Game/game.gd" id="1_o2piy"]
 [ext_resource type="PackedScene" uid="uid://cdwvtbtwmrqbn" path="res://scenes/PauseMenu/PauseMenu.tscn" id="2_hcope"]
 [ext_resource type="Texture2D" uid="uid://beg4vmqhsx6ak" path="res://icon.svg" id="3_6luik"]
+[ext_resource type="PackedScene" uid="uid://cp3p3kqcjh0me" path="res://scenes/EndMenu/EndMenu.tscn" id="3_yfekm"]
 [ext_resource type="Script" path="res://scenes/Game/Sprite2D.gd" id="4_lltyx"]
 
 [node name="Game" type="Node"]
@@ -11,6 +12,10 @@ script = ExtResource("1_o2piy")
 [node name="GUI" type="CanvasLayer" parent="."]
 
 [node name="PauseMenu" parent="GUI" instance=ExtResource("2_hcope")]
+unique_name_in_owner = true
+visible = false
+
+[node name="EndMenu" parent="GUI" instance=ExtResource("3_yfekm")]
 unique_name_in_owner = true
 visible = false
 
@@ -38,11 +43,11 @@ horizontal_alignment = 1
 layout_mode = 2
 alignment = 1
 
-[node name="Button" type="Button" parent="RemoveMe/HBoxContainer"]
+[node name="WinButton" type="Button" parent="RemoveMe/HBoxContainer"]
 layout_mode = 2
 text = "Win"
 
-[node name="Button2" type="Button" parent="RemoveMe/HBoxContainer"]
+[node name="LooseButton" type="Button" parent="RemoveMe/HBoxContainer"]
 layout_mode = 2
 text = "Loose"
 
@@ -50,3 +55,6 @@ text = "Loose"
 position = Vector2(637, 143)
 texture = ExtResource("3_6luik")
 script = ExtResource("4_lltyx")
+
+[connection signal="pressed" from="RemoveMe/HBoxContainer/WinButton" to="." method="_on_win"]
+[connection signal="pressed" from="RemoveMe/HBoxContainer/LooseButton" to="." method="_on_gameover"]
