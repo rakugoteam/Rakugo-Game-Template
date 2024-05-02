@@ -5,14 +5,16 @@
 [ext_resource type="PackedScene" uid="uid://c8vnncjwqcpab" path="res://scenes/OptionsMenu/Audio/AudioOptionsMenu.tscn" id="3_15g14"]
 [ext_resource type="PackedScene" uid="uid://b2numvphf2kau" path="res://scenes/OptionsMenu/Video/VideoOptionsMenu.tscn" id="4_62872"]
 
-
 [node name="OptionsContainer" type="TabContainer"]
-visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 3
 script = ExtResource("1_dvbsf")
 
 [node name="Controls" parent="." instance=ExtResource("2_nk5cv")]
-visible = false
 layout_mode = 2
 
 [node name="Audio" parent="." instance=ExtResource("3_15g14")]

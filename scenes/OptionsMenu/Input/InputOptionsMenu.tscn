@@ -2,9 +2,8 @@
 
 [ext_resource type="Script" path="res://scenes/OptionsMenu/Input/InputOptionsMenu.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://beg4vmqhsx6ak" path="res://icon.svg" id="2_2vovj"]
-[ext_resource type="Script" path="res://addons/rakugo_game_template/base/scripts/CaptureFocus.gd" id="2_wft4x"]
+[ext_resource type="Script" path="res://scenes/OptionsMenu/Input/Sprite2D.gd" id="3_7dtrp"]
 [ext_resource type="Script" path="res://scenes/OptionsMenu/Input/KeyAssignmentDialog.gd" id="3_wsh2h"]
-
 
 [node name="Controls" type="MarginContainer"]
 anchors_preset = 15
@@ -12,55 +11,60 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_top = 24
-theme_override_constants/margin_bottom = 24
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
 script = ExtResource("1")
-add_button_texture = ExtResource("2_2vovj")
-remove_button_texture = ExtResource("2_2vovj")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 custom_minimum_size = Vector2(400, 280)
 layout_mode = 2
-size_flags_horizontal = 4
 theme_override_constants/separation = 8
-script = ExtResource("2_wft4x")
-
-[node name="Tree" type="Tree" parent="VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_vertical = 3
-hide_root = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
-alignment = 1
 
-[node name="ResetButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Input Name"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Input Key"
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="InputsContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ResetButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Reset"
 
-[node name="KeyAssignmentDialog" type="ConfirmationDialog" parent="."]
+[node name="KeyAssignmentDialog" type="AcceptDialog" parent="."]
+unique_name_in_owner = true
 title = "Assign Key"
 size = Vector2i(400, 100)
 dialog_text = "Press a key or button..."
 script = ExtResource("3_wsh2h")
 
-[node name="KeyDeletionDialog" type="ConfirmationDialog" parent="."]
-title = "Remove Key"
-size = Vector2i(419, 100)
-dialog_text = "Are you sure you want to remove KEY from ACTION?"
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(647, 538)
+texture = ExtResource("2_2vovj")
+script = ExtResource("3_7dtrp")
 
-[node name="OneInputMinimumDialog" type="AcceptDialog" parent="."]
-title = "Cannot Remove"
-size = Vector2i(398, 100)
-
-[node name="AlreadyAssignedDialog" type="AcceptDialog" parent="."]
-title = "Already Assigned"
-size = Vector2i(398, 100)
-
-[connection signal="button_clicked" from="VBoxContainer/Tree" to="." method="_on_tree_button_clicked"]
-[connection signal="item_activated" from="VBoxContainer/Tree" to="." method="_on_tree_item_activated"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/ResetButton" to="." method="_on_reset_button_pressed"]
-[connection signal="canceled" from="KeyAssignmentDialog" to="." method="_on_key_assignment_dialog_canceled"]
-[connection signal="confirmed" from="KeyAssignmentDialog" to="." method="_on_key_assignment_dialog_confirmed"]
-[connection signal="confirmed" from="KeyDeletionDialog" to="." method="_on_key_deletion_dialog_confirmed"]
+[connection signal="hidden" from="." to="." method="_on_hidden"]
+[connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]
+[connection signal="pressed" from="VBoxContainer/ResetButton" to="." method="_on_reset_button_pressed"]
+[connection signal="event_choosed" from="KeyAssignmentDialog" to="." method="_on_key_assignment_dialog_event_choosed"]

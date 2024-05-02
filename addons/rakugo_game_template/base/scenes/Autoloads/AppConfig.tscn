@@ -1,6 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://cjke6crjg14a0"]
+[gd_scene load_steps=2 format=3 uid="uid://c84d5lh70sqam"]
 
-[ext_resource type="Script" path="res://addons/rakugo_game_template/base/scenes/Autoloads/AppConfig.gd" id="1_o0k5w"]
+[sub_resource type="GDScript" id="GDScript_bo47b"]
+script/source = "extends Node
+
+func _ready():
+	AppLog.app_opened()
+	AppSettings.set_from_config_and_window(get_window())
+"
 
 [node name="AppConfig" type="Node"]
-script = ExtResource("1_o0k5w")
+script = SubResource("GDScript_bo47b")

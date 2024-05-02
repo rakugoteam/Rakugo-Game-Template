@@ -131,6 +131,7 @@ alignment = 0
 
 [node name="OptionsContainer" parent="VBoxContainer/MarginContainer/HBoxContainer" instance=ExtResource("6_ky335")]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 
 [node name="CreditsContainer" parent="VBoxContainer/MarginContainer/HBoxContainer" instance=ExtResource("3_5dhvp")]

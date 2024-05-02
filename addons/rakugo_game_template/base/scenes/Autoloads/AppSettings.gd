@@ -1,6 +1,7 @@
-class_name AppSettings
 extends Node
 ## Interface to read/write general application settings through [Config].
+
+const CONFIG_FILE_LOCATION := "user://config.cfg"
 
 const INPUT_SECTION = 'InputSettings'
 const AUDIO_SECTION = 'AudioSettings'
@@ -11,66 +12,40 @@ const SCREEN_RESOLUTION = 'ScreenResolution'
 const MUTE_SETTING = 'Mute'
 const MASTER_BUS_INDEX = 0
 
+var config_file := ConfigFile.new()
+
+func _ready():
+	var err = config_file.load(CONFIG_FILE_LOCATION)
+	
+	if err != OK:
+		return
+	
+	#load input_events
+	if config_file.has_section(INPUT_SECTION):
+		var action_names = config_file.get_section_keys(INPUT_SECTION)
+		
+		for action_name in action_names:
+			if not InputMap.has_action(action_name):
+				push_error("Action: " + action_name + ", does not exist in the InputMap !")
+				continue
+				
+			InputMap.action_erase_events(action_name)
+			InputMap.action_add_event(
+				action_name,
+				config_file.get_value(INPUT_SECTION, action_name))
+
+func save_config_file():
+	config_file.save(CONFIG_FILE_LOCATION)
+
 # Input
-static var default_action_events : Dictionary
+func set_input_action(action_name:String, input_event:InputEvent):
+	config_file.set_value(INPUT_SECTION, action_name, input_event)
 
-static func get_config_input_events(action_name : String, default = null) -> Array:
-	return Config.get_config(INPUT_SECTION, action_name, default)
-
-static func set_config_input_events(action_name : String, inputs : Array) -> void:
-	Config.set_config(INPUT_SECTION, action_name, inputs)
-
-static func _clear_config_input_events():
-	Config.erase_section(INPUT_SECTION)
-
-static func remove_action_input_event(action_name : String, input_event : InputEvent):
-	InputMap.action_erase_event(action_name, input_event)
-	var action_events : Array[InputEvent] = InputMap.action_get_events(action_name)
-	var config_events : Array = get_config_input_events(action_name, action_events)
-	config_events.erase(input_event)
-	set_config_input_events(action_name, config_events)
-
-static func set_input_from_config(action_name : String):
-	var action_events : Array[InputEvent] = InputMap.action_get_events(action_name)
-	var config_events = get_config_input_events(action_name, action_events)
-	if config_events == action_events:
-		return
-	if config_events.is_empty():
-		Config.erase_section_key(INPUT_SECTION, action_name)
-		return
-	InputMap.action_erase_events(action_name)
-	for config_event in config_events:
-		if config_event not in action_events:
-			InputMap.action_add_event(action_name, config_event)
-
-static func get_filtered_action_names() -> Array[StringName]:
-	var return_list : Array[StringName] = []
-	var action_list : Array[StringName] = InputMap.get_actions()
-	for action_name in action_list:
-		if not action_name.begins_with("ui_"):
-			return_list.append(action_name)
-	return return_list
-
-static func reset_to_default_inputs() -> void:
-	_clear_config_input_events()
-	for action_name in default_action_events:
-		InputMap.action_erase_events(action_name)
-		var input_events = default_action_events[action_name]
-		for input_event in input_events:
-			InputMap.action_add_event(action_name, input_event)
-
-static func set_default_inputs() -> void:
-	var action_list : Array[StringName] = get_filtered_action_names()
-	for action_name in action_list:
-		default_action_events[action_name] = InputMap.action_get_events(action_name)
-
-static func set_inputs_from_config() -> void:
-	var action_list : Array[StringName] = get_filtered_action_names()
-	for action_name in action_list:
-		set_input_from_config(action_name)
+func reset_to_default_inputs() -> void:
+	# TODO
+	pass
 
 # Audio
-
 static func get_bus_volume(bus_name : String) -> float:
 	var bus_index : int = AudioServer.get_bus_index(bus_name)
 	if bus_index < 0:
@@ -140,14 +115,3 @@ static func set_video_from_config(window : Window) -> void:
 	if not (fullscreen_enabled or OS.has_feature("web")):
 		var current_resolution : Vector2i = get_resolution(window)
 		set_resolution(current_resolution, window)
-		
-# All
-
-static func set_from_config() -> void:
-	set_default_inputs()
-	set_inputs_from_config()
-	set_audio_from_config()
-
-static func set_from_config_and_window(window : Window) -> void:
-	set_from_config()
-	set_video_from_config(window)
