@@ -20,6 +20,8 @@ var sub_menu
 @onready var option_menu = %OptionsContainer
 @onready var credit_menu = %CreditsContainer
 
+@onready var confirm_popup = %ConfirmationDialog
+
 func _open_sub_menu(menu : Control):
 	if sub_menu == menu:
 		sub_menu.visible = !sub_menu.visible
@@ -53,6 +55,8 @@ func _input(event):
 func _ready():
 	if OS.has_feature("web"):
 		%ExitButton.hide()
+	else:
+		confirm_popup.get_ok_button().pressed.connect(_on_exit_confirmed)
 		
 	AppLog.version_opened(version_number)
 	$"%VersionNumber".text = "version : %s" % version_number
@@ -78,8 +82,10 @@ func _on_options_button_pressed():
 func _on_credits_button_pressed():
 	_open_sub_menu(credit_menu)
 
-
 func _on_exit_button_pressed():
+	confirm_popup.popup_centered_clamped()
+	
+func _on_exit_confirmed():
 	get_tree().quit()
 
 func _on_back_button_pressed():

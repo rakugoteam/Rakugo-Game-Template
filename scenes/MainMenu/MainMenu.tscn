@@ -140,35 +140,11 @@ layout_mode = 2
 size_flags_horizontal = 3
 vertical_scroll_mode = 1
 
-[node name="FlowControlContainer" type="MarginContainer" parent="."]
-layout_mode = 0
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
-
-[node name="FlowControl" type="Control" parent="FlowControlContainer"]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="BackButton" type="Button" parent="FlowControlContainer/FlowControl"]
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
 unique_name_in_owner = true
-visible = false
-custom_minimum_size = Vector2(62, 40)
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -40.0
-offset_right = 62.0
-grow_vertical = 0
-text = "Back"
+dialog_text = "Quit the Game ?"
 
 [connection signal="pressed" from="VBoxContainer/MarginContainer/HBoxContainer/MenuButtons/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/MarginContainer/HBoxContainer/MenuButtons/OptionsButton" to="." method="_on_options_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/MarginContainer/HBoxContainer/MenuButtons/CreditsButton" to="." method="_on_credits_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/MarginContainer/HBoxContainer/MenuButtons/ExitButton" to="." method="_on_exit_button_pressed"]
-[connection signal="pressed" from="FlowControlContainer/FlowControl/BackButton" to="." method="_on_back_button_pressed"]
