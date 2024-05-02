@@ -23,6 +23,7 @@ func _ready():
 func _on_resume_button_pressed():
 	hide()
 	set_process(false)
+	get_tree().paused = false
 
 func show_confirm_popup(confirm_text:String, on_ok_pressed:Callable):
 	confirm_popup.dialog_text = confirm_text
@@ -59,10 +60,11 @@ func _on_exit_button_pressed():
 	show_confirm_popup(confirm_quit, _on_confirm_exit_confirmed)
 
 func _on_confirm_restart_confirmed():
-	prints(name, get_tree().current_scene.scene_file_path)
+	get_tree().paused = false
 	SceneLoader.change_scene(get_tree().current_scene.scene_file_path)
 
 func _on_confirm_main_menu_confirmed():
+	get_tree().paused = false
 	SceneLoader.change_scene(ProjectSettings.get_setting(RakugoGameTemplate.main_menu_setting_path))
 
 func _on_confirm_exit_confirmed():
