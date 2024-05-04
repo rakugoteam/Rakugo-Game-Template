@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/Transitions/transitions.gd" id="1_8b6dk"]
 [ext_resource type="Shader" path="res://scenes/Transitions/Shaders/Diamond.gdshader" id="2_tr0bf"]
-[ext_resource type="Texture2D" uid="uid://beg4vmqhsx6ak" path="res://icon.svg" id="3_65ctw"]
+[ext_resource type="Texture2D" uid="uid://bux08ghndntvn" path="res://scenes/Transitions/Shaders/bg-image.png" id="3_8s86m"]
 
 [sub_resource type="Animation" id="Animation_oogso"]
 resource_name = "Circle"
@@ -275,7 +275,6 @@ _data = {
 shader = ExtResource("2_tr0bf")
 shader_parameter/progress = 1.0
 shader_parameter/diamondPixelSize = 30.0
-shader_parameter/bg_color = Color(1, 0.35, 1, 1)
 
 [node name="Transitions" type="CanvasLayer"]
 follow_viewport_enabled = true
@@ -294,4 +293,4 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("3_65ctw")
+texture = ExtResource("3_8s86m")

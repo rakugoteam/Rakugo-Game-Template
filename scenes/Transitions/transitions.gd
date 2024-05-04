@@ -15,7 +15,7 @@ const LINE = preload("res://scenes/Transitions/Shaders/Line.gdshader")
 
 
 func _ready():
-	transition("Circle", false)
+	transition("Diamond", false)
 
 
 func screen_ratio ():

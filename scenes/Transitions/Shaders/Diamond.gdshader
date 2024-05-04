@@ -8,7 +8,7 @@ uniform float progress : hint_range(0, 1);
 
 // Size of each diamond, in pixels.
 uniform float diamondPixelSize = 10.0;
-uniform vec4 bg_color: source_color = vec4(1,0.35,1,1);
+
 
 
 void fragment() {
