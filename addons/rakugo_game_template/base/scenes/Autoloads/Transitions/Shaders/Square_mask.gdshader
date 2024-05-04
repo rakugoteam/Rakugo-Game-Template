@@ -13,10 +13,8 @@ void fragment() {
 	float alpha3 = step(size + location_y, mix(0.5, UV.y, ratio_height));
 	float alpha4 = step(size - location_y, mix(0.5, 1.0-UV.y, ratio_height));
 	float alpha_total = alpha1 * alpha2 * alpha3 * alpha4;
-	vec4 orig_color = texture(TEXTURE, UV);
-	COLOR.rgb = orig_color.rgb;
 	if (invert == true) {
 		alpha_total = 1.0 - alpha_total;
 	}
-	COLOR.a = alpha_total * orig_color.a;
+	COLOR.a = alpha_total;
 }

@@ -60,11 +60,13 @@ func _on_exit_button_pressed():
 	show_confirm_popup(confirm_quit, _on_confirm_exit_confirmed)
 
 func _on_confirm_restart_confirmed():
-	get_tree().paused = false
+	confirm_popup.hide()
+	hide()
 	SceneLoader.change_scene(get_tree().current_scene.scene_file_path)
 
 func _on_confirm_main_menu_confirmed():
-	get_tree().paused = false
+	confirm_popup.hide()
+	hide()
 	SceneLoader.change_scene(ProjectSettings.get_setting(RakugoGameTemplate.main_menu_setting_path))
 
 func _on_confirm_exit_confirmed():

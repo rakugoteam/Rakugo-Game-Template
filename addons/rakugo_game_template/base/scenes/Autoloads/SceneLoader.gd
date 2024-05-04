@@ -39,16 +39,29 @@ func get_resource():
 	return _loaded_resource
 
 func change_scene_to_resource() -> void:
+	get_tree().paused = true
+	Transitions.transition(Transitions.transition_type.Diamond)
+	await Transitions.animation_player.animation_finished
 	var err = get_tree().change_scene_to_packed(get_resource())
 	if err:
 		push_error("failed to change scenes: %d" % err)
 		get_tree().quit()
+	Transitions.transition(Transitions.transition_type.Diamond, true)
+	await Transitions.animation_player.animation_finished
+	get_tree().paused = false
 
 func change_scene_to_loading_screen() -> void:
+	get_tree().paused = true
+	Transitions.transition(Transitions.transition_type.Diamond)
+	await Transitions.animation_player.animation_finished
 	var err = get_tree().call_deferred("change_scene_to_packed", _loading_screen)
 	if err:
 		push_error("failed to change scenes to loading screen: %d" % err)
 		get_tree().quit()
+	get_tree().paused = false
+	set_process(true)
+	Transitions.transition(Transitions.transition_type.Diamond, true)
+	await Transitions.animation_player.animation_finished
 
 func set_loading_screen(value : String) -> void:
 	if value == "":
@@ -96,17 +109,12 @@ func change_scene(scene_path : String, wait_after_load : bool = true) -> void:
 		_scene_loading_complete = true
 		call_deferred("emit_signal", "scene_loaded")
 		if _wait_after_load:
-			Transitions.transition(Transitions.transition_type.Diamond)
-			
 			change_scene_to_loading_screen()
-			set_process(true)
 			return
 		change_scene_to_resource()
 		return
-	Transitions.transition(Transitions.transition_type.Diamond)
 	ResourceLoader.load_threaded_request(_scene_path)
 	change_scene_to_loading_screen()
-	set_process(true)
 
 func _ready():
 	set_process(false)

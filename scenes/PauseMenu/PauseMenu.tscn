@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://djnvp4x64ukay" path="res://scenes/OptionsMenu/OptionsContainer.tscn" id="4_pyl8d"]
 
 [node name="PauseMenu" type="Control"]
-process_mode = 3
+process_mode = 2
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

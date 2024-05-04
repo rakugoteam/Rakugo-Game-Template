@@ -9,11 +9,9 @@ uniform bool invert = false;
 void fragment() {
 	float ratio = 1.0 / size_ratio;
 	float dist = distance(vec2(location_x, location_y), vec2(mix(0.5, UV.x, ratio), UV.y));
-	vec4 orig_color = texture(TEXTURE, UV);
-	COLOR.rgb = orig_color.rgb;
 	float alpha_total = (1.0 - step(size, dist));
 	if (invert == true) {
 		alpha_total = 1.0 - alpha_total;
 	}
-	COLOR.a = alpha_total * orig_color.a;
+	COLOR.a = alpha_total;
 }

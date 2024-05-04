@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://addons/rakugo_game_template/base/scripts/UISoundController.gd" id="3_6hy0s"]
 
 [node name="EndMenu" type="Panel"]
-process_mode = 3
+process_mode = 2
 custom_minimum_size = Vector2(410, 240)
 anchors_preset = 15
 anchor_right = 1.0
