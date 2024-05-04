@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bux08ghndntvn"
-path="res://.godot/imported/bg-image.png-531017c3b17860317dd812f8d17c4314.ctex"
+path="res://.godot/imported/bg-image.png-270025c59b98eaadee416089e003ff07.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/Transitions/Shaders/bg-image.png"
-dest_files=["res://.godot/imported/bg-image.png-531017c3b17860317dd812f8d17c4314.ctex"]
+source_file="res://addons/rakugo_game_template/base/scenes/Autoloads/Transitions/Shaders/bg-image.png"
+dest_files=["res://.godot/imported/bg-image.png-270025c59b98eaadee416089e003ff07.ctex"]
 
 [params]
 

@@ -12,7 +12,8 @@ func _enter_tree():
 	add_autoload_singleton("SceneLoader", "res://addons/rakugo_game_template/base/scenes/Autoloads/SceneLoader.gd")
 	add_autoload_singleton("ProjectMusicController", "res://addons/rakugo_game_template/base/scenes/Autoloads/ProjectMusicController.tscn")
 	add_autoload_singleton("ProjectUISoundController", "res://addons/rakugo_game_template/base/scenes/Autoloads/ProjectUISoundController.tscn")
-
+	add_autoload_singleton("Transitions", "res://addons/rakugo_game_template/base/scenes/Autoloads/Transitions/transitions.tscn")
+	
 	ProjectSettings.set_setting(loading_scene_setting_path, "res://scenes/LoadingScreen/LoadingScreen.tscn")
 	ProjectSettings.set_setting(main_menu_setting_path, "res://scenes/MainMenu/MainMenu.tscn")
 	ProjectSettings.set_setting(first_game_scene_setting_path, "res://scenes/Game/game.tscn")
@@ -22,6 +23,7 @@ func _exit_tree():
 	remove_autoload_singleton("SceneLoader")
 	remove_autoload_singleton("ProjectMusicController")
 	remove_autoload_singleton("ProjectUISoundController")
+	remove_autoload_singleton("Transitions")
 	
 	ProjectSettings.set_setting(loading_scene_setting_path, null)
 	ProjectSettings.set_setting(main_menu_setting_path, null)

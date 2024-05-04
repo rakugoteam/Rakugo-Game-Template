@@ -24,6 +24,7 @@ AppSettings="*res://addons/rakugo_game_template/base/scenes/Autoloads/AppSetting
 SceneLoader="*res://addons/rakugo_game_template/base/scenes/Autoloads/SceneLoader.gd"
 ProjectMusicController="*res://addons/rakugo_game_template/base/scenes/Autoloads/ProjectMusicController.tscn"
 ProjectUISoundController="*res://addons/rakugo_game_template/base/scenes/Autoloads/ProjectUISoundController.tscn"
+Transitions="*res://addons/rakugo_game_template/base/scenes/Autoloads/Transitions/transitions.tscn"
 
 [display]
 

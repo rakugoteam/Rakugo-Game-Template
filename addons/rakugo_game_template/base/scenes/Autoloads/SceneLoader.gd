@@ -96,11 +96,14 @@ func change_scene(scene_path : String, wait_after_load : bool = true) -> void:
 		_scene_loading_complete = true
 		call_deferred("emit_signal", "scene_loaded")
 		if _wait_after_load:
+			Transitions.transition(Transitions.transition_type.Diamond)
+			
 			change_scene_to_loading_screen()
 			set_process(true)
 			return
 		change_scene_to_resource()
 		return
+	Transitions.transition(Transitions.transition_type.Diamond)
 	ResourceLoader.load_threaded_request(_scene_path)
 	change_scene_to_loading_screen()
 	set_process(true)

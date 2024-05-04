@@ -1,8 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://b0w163uxufsvm"]
+[gd_scene load_steps=12 format=3 uid="uid://b0w163uxufsvm"]
 
-[ext_resource type="Script" path="res://scenes/Transitions/transitions.gd" id="1_8b6dk"]
-[ext_resource type="Shader" path="res://scenes/Transitions/Shaders/Diamond.gdshader" id="2_tr0bf"]
-[ext_resource type="Texture2D" uid="uid://bux08ghndntvn" path="res://scenes/Transitions/Shaders/bg-image.png" id="3_8s86m"]
+[ext_resource type="Script" path="res://addons/rakugo_game_template/base/scenes/Autoloads/Transitions/transitions.gd" id="1_8b6dk"]
+[ext_resource type="Shader" path="res://addons/rakugo_game_template/base/scenes/Autoloads/Transitions/Shaders/Diamond.gdshader" id="2_tr0bf"]
+[ext_resource type="Texture2D" uid="uid://bux08ghndntvn" path="res://addons/rakugo_game_template/base/scenes/Autoloads/Transitions/Shaders/bg-image.png" id="3_8s86m"]
 
 [sub_resource type="Animation" id="Animation_oogso"]
 resource_name = "Circle"
@@ -68,7 +68,6 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_h4jg3"]
 resource_name = "Line"
-length = 2.0
 tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -76,9 +75,9 @@ tracks/0/path = NodePath("TextureRect:material:shader_parameter/y_threshold")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 1, 2)
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
 }
 
 [sub_resource type="Animation" id="Animation_gf7i0"]
@@ -93,76 +92,6 @@ tracks/0/keys = {
 "handle_modes": PackedInt32Array(0),
 "points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
-}
-
-[sub_resource type="Animation" id="Animation_ee5f4"]
-resource_name = "Sprite"
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("TextureRect:material:shader_parameter/size")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(5, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 1)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("TextureRect:material:shader_parameter/ratio_width")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0.3, -0.25, 0, 0.25, 0, 0.01, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 1)
-}
-tracks/2/type = "bezier"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("TextureRect:material:shader_parameter/ratio_height")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0.33, -0.25, 0, 0.25, 0, 0.01, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 1)
-}
-tracks/3/type = "bezier"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("TextureRect:material:shader_parameter/location_x")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(-0.255, -0.25, 0, 0.25, 0, 0.5, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 1)
-}
-tracks/4/type = "bezier"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("TextureRect:material:shader_parameter/location_y")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(-0.455, -0.25, 0, 0.25, 0, 0.5, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 1)
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("TextureRect:material:shader_parameter/invert")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, false]
 }
 
 [sub_resource type="Animation" id="Animation_xwrao"]
@@ -266,7 +195,6 @@ _data = {
 "Diamond": SubResource("Animation_rcjvv"),
 "Line": SubResource("Animation_h4jg3"),
 "RESET": SubResource("Animation_gf7i0"),
-"Sprite": SubResource("Animation_ee5f4"),
 "Square": SubResource("Animation_xwrao"),
 "Swipe": SubResource("Animation_x0cy3")
 }
