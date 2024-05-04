@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://b0w163uxufsvm"]
 
 [ext_resource type="Script" path="res://scenes/Transitions/transitions.gd" id="1_8b6dk"]
-[ext_resource type="Shader" path="res://scenes/Transitions/Shaders/Line.gdshader" id="2_vcbac"]
+[ext_resource type="Shader" path="res://scenes/Transitions/Shaders/Diamond.gdshader" id="2_tr0bf"]
 [ext_resource type="Texture2D" uid="uid://beg4vmqhsx6ak" path="res://icon.svg" id="3_65ctw"]
 
 [sub_resource type="Animation" id="Animation_oogso"]
@@ -272,11 +272,10 @@ _data = {
 }
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_da4os"]
-shader = ExtResource("2_vcbac")
-shader_parameter/num_lines = 50.0
-shader_parameter/y_threshold = 0.0
-shader_parameter/line_color_a = Color(1, 1, 1, 1)
-shader_parameter/line_color_b = Color(0, 0, 0, 1)
+shader = ExtResource("2_tr0bf")
+shader_parameter/progress = 1.0
+shader_parameter/diamondPixelSize = 30.0
+shader_parameter/bg_color = Color(1, 0.35, 1, 1)
 
 [node name="Transitions" type="CanvasLayer"]
 follow_viewport_enabled = true

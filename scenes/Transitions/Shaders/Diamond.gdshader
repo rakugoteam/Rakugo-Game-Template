@@ -1,3 +1,5 @@
+//Based on https://godotshaders.com/shader/diamond-based-screen-transition/ 
+
 shader_type canvas_item;
 
 // Ranges from 0 to 1 over the course of the transition.
@@ -6,8 +8,11 @@ uniform float progress : hint_range(0, 1);
 
 // Size of each diamond, in pixels.
 uniform float diamondPixelSize = 10.0;
+uniform vec4 bg_color: source_color = vec4(1,0.35,1,1);
+
 
 void fragment() {
+
 	float xFraction = fract(FRAGCOORD.x / diamondPixelSize);
 	float yFraction = fract(FRAGCOORD.y / diamondPixelSize);
 	float xDistance = abs(xFraction - 0.5);
@@ -15,4 +20,5 @@ void fragment() {
 	if (xDistance + yDistance + UV.x + UV.y > progress * 4.0) {
 		discard;
 	}
+
 }
