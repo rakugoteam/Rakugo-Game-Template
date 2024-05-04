@@ -84,49 +84,58 @@ custom_minimum_size = Vector2(128, 40)
 layout_mode = 2
 text = "Exit Game"
 
-[node name="SubMenuContainer" type="Panel" parent="."]
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
+unique_name_in_owner = true
+initial_position = 2
+
+[node name="SubMenuContainer" type="MarginContainer" parent="."]
 unique_name_in_owner = true
 visible = false
-custom_minimum_size = Vector2(360, 360)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="Panel" type="Panel" parent="SubMenuContainer"]
+layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="SubMenuContainer"]
-layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = -203.5
-offset_bottom = 203.5
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="OptionsContainer" parent="SubMenuContainer/VBoxContainer" instance=ExtResource("4_pyl8d")]
-visible = true
+[node name="MarginContainer" type="MarginContainer" parent="SubMenuContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
 
-[node name="HBoxContainer" type="HBoxContainer" parent="SubMenuContainer/VBoxContainer"]
+[node name="OptionsContainer" parent="SubMenuContainer/VBoxContainer/MarginContainer" instance=ExtResource("4_pyl8d")]
 layout_mode = 2
-alignment = 1
+size_flags_vertical = 3
 
-[node name="BackButton" type="Button" parent="SubMenuContainer/VBoxContainer/HBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="SubMenuContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="BackButton" type="Button" parent="SubMenuContainer/VBoxContainer/MarginContainer2"]
 custom_minimum_size = Vector2(62, 40)
 layout_mode = 2
 text = "Back"
-
-[node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
-unique_name_in_owner = true
-initial_position = 2
 
 [connection signal="pressed" from="MenuContainer/VBoxContainer/MenuButtons/ResumeButton" to="." method="_on_resume_button_pressed"]
 [connection signal="pressed" from="MenuContainer/VBoxContainer/MenuButtons/RestartButton" to="." method="_on_restart_button_pressed"]
 [connection signal="pressed" from="MenuContainer/VBoxContainer/MenuButtons/OptionsButton" to="." method="_on_options_button_pressed"]
 [connection signal="pressed" from="MenuContainer/VBoxContainer/MenuButtons/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
 [connection signal="pressed" from="MenuContainer/VBoxContainer/MenuButtons/ExitButton" to="." method="_on_exit_button_pressed"]
-[connection signal="pressed" from="SubMenuContainer/VBoxContainer/HBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="SubMenuContainer/VBoxContainer/MarginContainer2/BackButton" to="." method="_on_back_button_pressed"]

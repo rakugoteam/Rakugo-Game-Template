@@ -5,21 +5,22 @@
 [ext_resource type="Script" path="res://scenes/OptionsMenu/Input/Sprite2D.gd" id="3_7dtrp"]
 [ext_resource type="Script" path="res://scenes/OptionsMenu/Input/KeyAssignmentDialog.gd" id="3_wsh2h"]
 
-[node name="Controls" type="MarginContainer"]
+[node name="Controls" type="Control"]
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
 script = ExtResource("1")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-custom_minimum_size = Vector2(400, 280)
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/separation = 8
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
@@ -49,6 +50,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ResetButton" type="Button" parent="VBoxContainer"]
+visible = false
 layout_mode = 2
 text = "Reset"
 

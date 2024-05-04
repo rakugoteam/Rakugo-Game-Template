@@ -129,17 +129,34 @@ layout_mode = 2
 text = "Exit"
 alignment = 0
 
-[node name="OptionsContainer" parent="VBoxContainer/MarginContainer/HBoxContainer" instance=ExtResource("6_ky335")]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-
 [node name="CreditsContainer" parent="VBoxContainer/MarginContainer/HBoxContainer" instance=ExtResource("3_5dhvp")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 vertical_scroll_mode = 1
+
+[node name="OptionsMenu" type="Panel" parent="VBoxContainer/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MarginContainer/HBoxContainer/OptionsMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="OptionsContainer" parent="VBoxContainer/MarginContainer/HBoxContainer/OptionsMenu/MarginContainer" instance=ExtResource("6_ky335")]
+layout_mode = 2
 
 [node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
 unique_name_in_owner = true

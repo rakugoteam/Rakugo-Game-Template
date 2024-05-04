@@ -17,7 +17,7 @@ var sub_menu
 @onready var exit_button = %ExitButton
 @onready var menu_button_list = [play_button,option_button,credit_button,exit_button]
 
-@onready var option_menu = %OptionsContainer
+@onready var option_menu = %OptionsMenu
 @onready var credit_menu = %CreditsContainer
 
 @onready var confirm_popup = %ConfirmationDialog
