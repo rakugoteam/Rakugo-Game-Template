@@ -58,8 +58,7 @@ func _ready():
 	else:
 		confirm_popup.get_ok_button().pressed.connect(_on_exit_confirmed)
 		
-	AppLog.version_opened(version_number)
-	$"%VersionNumber".text = "version : %s" % version_number
+	%VersionNumber.text = "version : %s" % version_number
 	
 	if Template_position=="Right" :
 		header_margin.size_flags_horizontal  = SIZE_SHRINK_END

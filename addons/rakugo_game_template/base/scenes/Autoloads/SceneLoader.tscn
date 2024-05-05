@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cnjukgon4a7cg"]
-
-[ext_resource type="Script" path="res://addons/rakugo_game_template/base/scenes/Autoloads/SceneLoader.gd" id="1_l0dhx"]
-
-[node name="SceneLoader" type="Node"]
-script = ExtResource("1_l0dhx")
