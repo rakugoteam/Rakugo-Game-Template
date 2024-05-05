@@ -9,6 +9,7 @@ const confirm_quit = "Quit the Game ?"
 
 @onready var end_message = %EndMessage
 @onready var confirm_popup = %ConfirmationDialog
+@onready var restart_button = %RestartButton
 
 func _ready():
 	if OS.has_feature("web"):
@@ -52,12 +53,18 @@ func _on_main_menu_button_pressed():
 	show_confirm_popup(confirm_menu, _on_confirm_main_menu_confirmed)
 
 func _on_confirm_restart_confirmed():
-	get_tree().paused = false
+	confirm_popup.hide()
+	hide()
 	SceneLoader.change_scene(get_tree().current_scene.scene_file_path)
 
 func _on_confirm_main_menu_confirmed():
-	get_tree().paused = false
+	confirm_popup.hide()
+	hide()
 	SceneLoader.change_scene(ProjectSettings.get_setting(RakugoGameTemplate.main_menu_setting_path))
 
 func _on_confirm_exit_confirmed():
 	get_tree().quit()
+
+func _on_visibility_changed():
+	if visible and is_instance_valid(restart_button):
+		restart_button.grab_focus()

@@ -1,10 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://c6k5nnpbypshi"]
+[gd_scene load_steps=6 format=3 uid="uid://c6k5nnpbypshi"]
 
 [ext_resource type="Script" path="res://scenes/MainMenu/MainMenu.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://t2dui8ppm3a4" path="res://scenes/Credits/Credits.tscn" id="3_5dhvp"]
-[ext_resource type="Script" path="res://addons/rakugo_game_template/base/scripts/CaptureFocus.gd" id="4_l1ebe"]
-[ext_resource type="PackedScene" uid="uid://bkcsjsk2ciff" path="res://addons/rakugo_game_template/base/scenes/MusicPlayers/BackgroundMusicPlayer.tscn" id="4_w8sbm"]
-[ext_resource type="Script" path="res://addons/rakugo_game_template/base/scripts/UISoundController.gd" id="6_bs342"]
+[ext_resource type="PackedScene" uid="uid://bkcsjsk2ciff" path="res://addons/rakugo_game_template/MusicPlayers/BackgroundMusicPlayer.tscn" id="4_w8sbm"]
+[ext_resource type="Script" path="res://addons/rakugo_game_template/scripts/UISoundController.gd" id="6_bs342"]
 [ext_resource type="PackedScene" uid="uid://djnvp4x64ukay" path="res://scenes/OptionsMenu/OptionsContainer.tscn" id="6_ky335"]
 
 [node name="MainMenu" type="Control"]
@@ -98,7 +97,6 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/separation = 16
 alignment = 1
-script = ExtResource("4_l1ebe")
 
 [node name="PlayButton" type="Button" parent="VBoxContainer/MarginContainer/HBoxContainer/MenuButtons"]
 unique_name_in_owner = true

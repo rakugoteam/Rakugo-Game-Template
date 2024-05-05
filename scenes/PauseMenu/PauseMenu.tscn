@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cdwvtbtwmrqbn"]
+[gd_scene load_steps=4 format=3 uid="uid://cdwvtbtwmrqbn"]
 
 [ext_resource type="Script" path="res://scenes/PauseMenu/PauseMenu.gd" id="2"]
-[ext_resource type="Script" path="res://addons/rakugo_game_template/base/scripts/CaptureFocus.gd" id="3_43rgy"]
-[ext_resource type="Script" path="res://addons/rakugo_game_template/base/scripts/UISoundController.gd" id="3_hgthy"]
+[ext_resource type="Script" path="res://addons/rakugo_game_template/scripts/UISoundController.gd" id="3_hgthy"]
 [ext_resource type="PackedScene" uid="uid://djnvp4x64ukay" path="res://scenes/OptionsMenu/OptionsContainer.tscn" id="4_pyl8d"]
 
 [node name="PauseMenu" type="Control"]
@@ -54,9 +53,9 @@ size_flags_horizontal = 4
 size_flags_vertical = 3
 theme_override_constants/separation = 16
 alignment = 1
-script = ExtResource("3_43rgy")
 
 [node name="ResumeButton" type="Button" parent="MenuContainer/VBoxContainer/MenuButtons"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(128, 40)
 layout_mode = 2
 text = "Resume"
@@ -133,6 +132,7 @@ custom_minimum_size = Vector2(62, 40)
 layout_mode = 2
 text = "Back"
 
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="pressed" from="MenuContainer/VBoxContainer/MenuButtons/ResumeButton" to="." method="_on_resume_button_pressed"]
 [connection signal="pressed" from="MenuContainer/VBoxContainer/MenuButtons/RestartButton" to="." method="_on_restart_button_pressed"]
 [connection signal="pressed" from="MenuContainer/VBoxContainer/MenuButtons/OptionsButton" to="." method="_on_options_button_pressed"]

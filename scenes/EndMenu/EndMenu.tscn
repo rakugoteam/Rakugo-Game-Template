@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cp3p3kqcjh0me"]
+[gd_scene load_steps=3 format=3 uid="uid://cp3p3kqcjh0me"]
 
 [ext_resource type="Script" path="res://scenes/EndMenu/EndMenu.gd" id="2"]
-[ext_resource type="Script" path="res://addons/rakugo_game_template/base/scripts/CaptureFocus.gd" id="2_2n6cd"]
-[ext_resource type="Script" path="res://addons/rakugo_game_template/base/scripts/UISoundController.gd" id="3_6hy0s"]
+[ext_resource type="Script" path="res://addons/rakugo_game_template/scripts/UISoundController.gd" id="3_6hy0s"]
 
 [node name="EndMenu" type="Panel"]
 process_mode = 2
@@ -55,7 +54,6 @@ theme_override_constants/margin_bottom = 4
 layout_mode = 2
 theme_override_constants/separation = 4
 alignment = 1
-script = ExtResource("2_2n6cd")
 
 [node name="MainMenuButton" type="Button" parent="PanelContainer/VBoxContainer/MarginContainer/ButtonsContainer"]
 unique_name_in_owner = true
@@ -64,6 +62,7 @@ layout_mode = 2
 text = "Main Menu"
 
 [node name="RestartButton" type="Button" parent="PanelContainer/VBoxContainer/MarginContainer/ButtonsContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(128, 40)
 layout_mode = 2
 text = "Restart"
@@ -78,6 +77,7 @@ text = "Exit Game"
 unique_name_in_owner = true
 initial_position = 2
 
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/MarginContainer/ButtonsContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/MarginContainer/ButtonsContainer/RestartButton" to="." method="_on_restart_button_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/MarginContainer/ButtonsContainer/ExitButton" to="." method="_on_exit_button_pressed"]

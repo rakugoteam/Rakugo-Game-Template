@@ -6,6 +6,7 @@ const confirm_quit = "Quit the Game ?"
 
 @onready var confirm_popup = %ConfirmationDialog
 @onready var sub_menu_container = %SubMenuContainer
+@onready var resume_button = %ResumeButton
 
 func _process(_delta):
 	if visible and Input.is_action_just_pressed("ui_cancel"):
@@ -74,3 +75,7 @@ func _on_confirm_exit_confirmed():
 
 func _on_back_button_pressed():
 	sub_menu_container.hide()
+
+func _on_visibility_changed():
+	if visible and is_instance_valid(resume_button):
+		resume_button.grab_focus()

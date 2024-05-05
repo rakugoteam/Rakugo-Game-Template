@@ -1,8 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://b2numvphf2kau"]
+[gd_scene load_steps=2 format=3 uid="uid://b2numvphf2kau"]
 
 [ext_resource type="Script" path="res://scenes/OptionsMenu/Video/VideoOptionsMenu.gd" id="1"]
-[ext_resource type="Script" path="res://addons/rakugo_game_template/base/scripts/CaptureFocus.gd" id="2_dgrai"]
-
 
 [node name="Video" type="MarginContainer"]
 anchors_preset = 15
@@ -17,8 +15,6 @@ custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 alignment = 1
-script = ExtResource("2_dgrai")
-search_depth = 2
 
 [node name="FullscreenControl" type="HBoxContainer" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 40)
