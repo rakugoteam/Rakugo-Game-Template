@@ -1,31 +1,18 @@
 extends Control
 
-@export var audio_control_scene : PackedScene
 @export var hide_busses : Array[String]
 
-@onready var mute_button = $VBoxContainer/MuteControl/MuteButton
-
-func _add_audio_control(bus_name, bus_value):
-	if audio_control_scene == null or bus_name in hide_busses:
-		return
-	var audio_control = audio_control_scene.instantiate()
-	audio_control.bus_name = bus_name
-	audio_control.bus_value = bus_value
-	%AudioControlContainer.call_deferred("add_child", audio_control)
-	audio_control.connect("bus_value_changed", AppSettings.set_bus_volume_from_linear)
-
-func _add_audio_bus_controls():
-	for bus_iter in AudioServer.bus_count:
-		var bus_name : String = AudioServer.get_bus_name(bus_iter)
-		var linear : float = AppSettings.get_bus_volume_to_linear(bus_name)
-		_add_audio_control(bus_name, linear)
-
-func _update_ui():
-	_add_audio_bus_controls()
-	mute_button.button_pressed = AppSettings.is_muted()
+const audio_control_scene = preload("res://scenes/OptionsMenu/Audio/AudioControl/AudioControl.tscn")
 
 func _ready():
-	_update_ui()
+	%MuteButton.set_pressed_no_signal(AudioServer.is_bus_mute(0))
+	
+	for bus_index in AudioServer.bus_count:
+		var audio_control = audio_control_scene.instantiate()
+		audio_control.bus_index = bus_index
+		audio_control.bus_value = db_to_linear(AudioServer.get_bus_volume_db(bus_index))
+		
+		%AudioControlContainer.add_child(audio_control)
 
-func _on_MuteButton_toggled(button_pressed):
-	AppSettings.set_mute(button_pressed)
+func _on_mute_button_toggled(toggled_on):
+	AppSettings.set_mute(toggled_on)

@@ -3,7 +3,6 @@ extends Control
 
 @export var version_number : String = '0.0.0'
 
-var credits_scene
 var sub_menu
 
 # Position : margin

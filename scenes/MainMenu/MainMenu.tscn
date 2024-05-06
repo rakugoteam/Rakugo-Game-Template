@@ -81,15 +81,15 @@ vertical_alignment = 1
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/margin_left = 32
+theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 32
+theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/separation = 32
+theme_override_constants/separation = 16
 
 [node name="MenuButtons" type="VBoxContainer" parent="VBoxContainer/MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
@@ -100,14 +100,12 @@ alignment = 1
 
 [node name="PlayButton" type="Button" parent="VBoxContainer/MarginContainer/HBoxContainer/MenuButtons"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(128, 40)
 layout_mode = 2
 text = "Play"
 alignment = 0
 
 [node name="OptionsButton" type="Button" parent="VBoxContainer/MarginContainer/HBoxContainer/MenuButtons"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(128, 40)
 layout_mode = 2
 text = "Options
 "
@@ -115,14 +113,12 @@ alignment = 0
 
 [node name="CreditsButton" type="Button" parent="VBoxContainer/MarginContainer/HBoxContainer/MenuButtons"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(128, 40)
 layout_mode = 2
 text = "Credits"
 alignment = 0
 
 [node name="ExitButton" type="Button" parent="VBoxContainer/MarginContainer/HBoxContainer/MenuButtons"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(128, 40)
 layout_mode = 2
 text = "Exit"
 alignment = 0

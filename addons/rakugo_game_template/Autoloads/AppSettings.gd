@@ -10,9 +10,12 @@ const VIDEO_SECTION = 'VideoSettings'
 const FULLSCREEN_ENABLED = 'FullscreenEnabled'
 const SCREEN_RESOLUTION = 'ScreenResolution'
 const MUTE_SETTING = 'Mute'
+const BUSSES_VOLUME = 'BussesVolume'
 const MASTER_BUS_INDEX = 0
 
 var config_file := ConfigFile.new()
+
+var busses_volume := {}
 
 func _ready():
 	var err = config_file.load(CONFIG_FILE_LOCATION)
@@ -33,6 +36,31 @@ func _ready():
 			InputMap.action_add_event(
 				action_name,
 				config_file.get_value(INPUT_SECTION, action_name))
+	
+	#audio
+	if config_file.has_section(AUDIO_SECTION):
+		if config_file.get_value(AUDIO_SECTION, MUTE_SETTING, false):
+			AudioServer.set_bus_mute(MASTER_BUS_INDEX, true)
+			
+		var dictio = config_file.get_value(AUDIO_SECTION, BUSSES_VOLUME, {})
+		
+		for bus_index in dictio:
+			AudioServer.set_bus_volume_db(bus_index, linear_to_db(dictio[bus_index]))
+	
+	#video
+	if config_file.has_section(VIDEO_SECTION):
+		var main_window = get_window()
+		
+		if config_file.get_value(VIDEO_SECTION, FULLSCREEN_ENABLED, is_master_muted()):
+			main_window.mode = Window.MODE_EXCLUSIVE_FULLSCREEN
+			
+		if config_file.has_section_key(VIDEO_SECTION, SCREEN_RESOLUTION):
+			var res_value = config_file.get_value(VIDEO_SECTION, SCREEN_RESOLUTION)
+			
+			main_window.content_scale_size = res_value
+			
+			if main_window.mode != Window.MODE_EXCLUSIVE_FULLSCREEN:
+				main_window.size = res_value
 
 func save_config_file():
 	config_file.save(CONFIG_FILE_LOCATION)
@@ -46,72 +74,41 @@ func reset_to_default_inputs() -> void:
 	pass
 
 # Audio
-func get_bus_volume(bus_name : String) -> float:
-	var bus_index : int = AudioServer.get_bus_index(bus_name)
-	if bus_index < 0:
-		return 0.0
-	return AudioServer.get_bus_volume_db(bus_index)
+func set_bus_volume_from_linear(bus_index : int, linear : float) -> void:
+	AudioServer.set_bus_volume_db(bus_index, linear_to_db(linear))
+	
+	busses_volume[bus_index] = linear
+	
+	config_file.set_value(AUDIO_SECTION, BUSSES_VOLUME, busses_volume)
 
-func get_bus_volume_to_linear(bus_name : String) -> float:
-	return db_to_linear(get_bus_volume(bus_name))
-
-func set_bus_volume(bus_name : String, volume_db : float) -> void:
-	var bus_index : int = AudioServer.get_bus_index(bus_name)
-	if bus_index < 0:
-		return
-	AudioServer.set_bus_volume_db(bus_index, volume_db)
-	config_file.set_value(AUDIO_SECTION, bus_name, volume_db)
-
-func set_bus_volume_from_linear(bus_name : String, linear : float) -> void:
-	set_bus_volume(bus_name, linear_to_db(linear))
-
-func is_muted() -> bool:
+func is_master_muted() -> bool:
 	return AudioServer.is_bus_mute(MASTER_BUS_INDEX)
 
 func set_mute(mute_flag : bool) -> void:
 	AudioServer.set_bus_mute(MASTER_BUS_INDEX, mute_flag)
+	
 	config_file.set_value(AUDIO_SECTION, MUTE_SETTING, mute_flag)
 
-func set_audio_from_config():
-	for bus_iter in AudioServer.bus_count:
-		var bus_name : String = AudioServer.get_bus_name(bus_iter)
-		var bus_volume_db : float = AudioServer.get_bus_volume_db(bus_iter)
-		bus_volume_db = config_file.get_value(AUDIO_SECTION, bus_name, bus_volume_db)
-		if is_nan(bus_volume_db):
-			bus_volume_db = 1.0
-			config_file.set_value(AUDIO_SECTION, bus_name, bus_volume_db)
-		AudioServer.set_bus_volume_db(bus_iter, bus_volume_db)
-	var mute_audio_flag : bool = is_muted()
-	mute_audio_flag = config_file.get_value(AUDIO_SECTION, MUTE_SETTING, mute_audio_flag)
-	set_mute(mute_audio_flag)
-
 # Video
-
-func set_fullscreen_enabled(value : bool, window : Window) -> void:
-	window.mode = Window.MODE_EXCLUSIVE_FULLSCREEN if (value) else Window.MODE_WINDOWED
+func set_fullscreen(value:bool):
+	var main_window = get_window()
+	
+	main_window.mode = Window.MODE_EXCLUSIVE_FULLSCREEN if value else Window.MODE_WINDOWED
+	
+	if main_window.mode == Window.MODE_WINDOWED:
+		main_window.size = config_file.get_value(VIDEO_SECTION, SCREEN_RESOLUTION,
+			Vector2i(
+				ProjectSettings.get_setting("display/window/size/viewport_width"),
+				ProjectSettings.get_setting("display/window/size/viewport_height")))
+	
 	config_file.set_value(VIDEO_SECTION, FULLSCREEN_ENABLED, value)
 
-func set_resolution(value : Vector2i, window : Window) -> void:
-	if value.x == 0 or value.y == 0:
-		return
-	window.size = value
+func set_resolution(value : Vector2i) -> void:
+	var main_window = get_window()
+	
+	main_window.content_scale_size = value
+	
+	if main_window.mode != Window.MODE_EXCLUSIVE_FULLSCREEN:
+		main_window.size = value
+		
 	config_file.set_value(VIDEO_SECTION, SCREEN_RESOLUTION, value)
-
-func reset_video_config(window : Window) -> void:
-	config_file.set_value(VIDEO_SECTION, FULLSCREEN_ENABLED, ((window.mode == Window.MODE_EXCLUSIVE_FULLSCREEN) or (window.mode == Window.MODE_FULLSCREEN)))
-
-func is_fullscreen(window : Window) -> bool:
-	return (window.mode == Window.MODE_EXCLUSIVE_FULLSCREEN) or (window.mode == Window.MODE_FULLSCREEN)
-
-func get_resolution(window : Window) -> Vector2i:
-	var current_resolution : Vector2i = window.size
-	current_resolution = config_file.get_value(VIDEO_SECTION, SCREEN_RESOLUTION, current_resolution)
-	return current_resolution
-
-func set_video_from_config(window : Window) -> void:
-	var fullscreen_enabled : bool = is_fullscreen(window)
-	fullscreen_enabled = config_file.get_value(VIDEO_SECTION, FULLSCREEN_ENABLED, fullscreen_enabled)
-	set_fullscreen_enabled(fullscreen_enabled, window)
-	if not (fullscreen_enabled or OS.has_feature("web")):
-		var current_resolution : Vector2i = get_resolution(window)
-		set_resolution(current_resolution, window)
