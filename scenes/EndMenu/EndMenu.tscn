@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cp3p3kqcjh0me"]
 
 [ext_resource type="Script" path="res://scenes/EndMenu/EndMenu.gd" id="2"]
-[ext_resource type="Script" path="res://addons/rakugo_game_template/scripts/UISoundController.gd" id="3_6hy0s"]
+[ext_resource type="PackedScene" uid="uid://dnlyj8r7kuvas" path="res://scenes/ConfirmDialog/ConfirmDialog.tscn" id="2_6mgxw"]
 
 [node name="EndMenu" type="Panel"]
 process_mode = 2
@@ -12,9 +12,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2")
-
-[node name="UISoundController" type="Node" parent="."]
-script = ExtResource("3_6hy0s")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -73,9 +70,8 @@ custom_minimum_size = Vector2(128, 40)
 layout_mode = 2
 text = "Exit Game"
 
-[node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
+[node name="ConfirmDialog" parent="." instance=ExtResource("2_6mgxw")]
 unique_name_in_owner = true
-initial_position = 2
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/MarginContainer/ButtonsContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]

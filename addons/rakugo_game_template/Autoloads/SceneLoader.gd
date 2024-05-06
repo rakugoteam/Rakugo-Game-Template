@@ -39,16 +39,21 @@ func get_resource():
 	return _loaded_resource
 
 func change_scene_to_resource() -> void:
-	get_tree().paused = true
+	var current_tree = get_tree()
+	current_tree.paused = true
+	
 	Transitions.transition(Transitions.transition_type.Diamond)
 	await Transitions.animation_player.animation_finished
-	var err = get_tree().change_scene_to_packed(get_resource())
+	
+	var err = current_tree.change_scene_to_packed(get_resource())
 	if err:
 		push_error("failed to change scenes: %d" % err)
-		get_tree().quit()
+		current_tree.quit()
+	
 	Transitions.transition(Transitions.transition_type.Diamond, true)
 	await Transitions.animation_player.animation_finished
-	get_tree().paused = false
+	
+	current_tree.paused = false
 
 func change_scene_to_loading_screen() -> void:
 	get_tree().paused = true

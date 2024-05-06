@@ -66,8 +66,6 @@ func _ready():
 	
 	if ProjectSettings.get_setting(RakugoGameTemplate.loading_scene_setting_path).is_empty():
 		play_button.hide()
-	else:
-		play_button.grab_focus()
 
 func _on_play_button_pressed():
 	SceneLoader.change_scene(ProjectSettings.get_setting(RakugoGameTemplate.first_game_scene_setting_path))

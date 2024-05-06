@@ -23,7 +23,7 @@ addons/rakugo_game_template/first_game_scene_path="res://scenes/Game/game.tscn"
 AppSettings="*res://addons/rakugo_game_template/Autoloads/AppSettings.gd"
 SceneLoader="*res://addons/rakugo_game_template/Autoloads/SceneLoader.gd"
 ProjectMusicController="*res://addons/rakugo_game_template/Autoloads/ProjectMusicController.tscn"
-ProjectUISoundController="*res://addons/rakugo_game_template/Autoloads/ProjectUISoundController.tscn"
+UISoundManager="*res://addons/rakugo_game_template/Autoloads/UISoundManager/UISoundManager.tscn"
 Transitions="*res://addons/rakugo_game_template/Autoloads/Transitions/transitions.tscn"
 
 [display]
