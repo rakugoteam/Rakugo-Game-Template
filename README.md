@@ -13,6 +13,8 @@ Inspired by the [GGT](https://github.com/crystal-bit/godot-game-template/tree/ma
 * **Game Template Scene** with a Pause Menu and a End Menu (Win/Loose)
 * **Pause Menu** with Resume, Restart, Options, Main Menu, and Exit Buttons
 * **End Menu** with Restart, Main Menu and Exit Buttons
+* **Scene Loader** use it to load and change scene easily
+* **UI Sounds Manager** handle the UI sounds in one place
 
 ![Screenshot](Screenshot.png)
 
@@ -69,6 +71,8 @@ Transitions.transition(Transitions.transition_type.Square)
 await Transitions.animation_player.finished
 get_tree().pause = false
 ```
+
+* **UISoundManager** you do not need to call him, it will do the work for you. The only thing to do is to open "res://addons/rakugo_game_template/Autoloads/UISoundManager/UISoundManager.tscn" and parametrize the values of the main node *UISoundManager*. *Audio Bus* is the name of the audio bus the AudioStreamPlayer will use to play the "bip bip boup" of your UI. The next both values are Array. They will be use to take sound inside them randomly except if you add only just one. The first Array is for *pressed* sounds and the second *hovered* ones.
 
 ## Infos
 
