@@ -1,0 +1,79 @@
+[gd_scene load_steps=3 format=3 uid="uid://cp3p3kqcjh0me"]
+
+[ext_resource type="Script" path="res://scenes/EndMenu/EndMenu.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://dnlyj8r7kuvas" path="res://scenes/ConfirmDialog/ConfirmDialog.tscn" id="2_6mgxw"]
+
+[node name="EndMenu" type="Panel"]
+process_mode = 2
+custom_minimum_size = Vector2(410, 240)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.4
+anchor_right = 0.5
+anchor_bottom = 0.6
+offset_left = -196.0
+offset_top = -33.5
+offset_right = 196.0
+offset_bottom = 33.5
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="EndMessage" type="Label" parent="PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+text = "Text"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="ButtonsContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="MainMenuButton" type="Button" parent="PanelContainer/VBoxContainer/MarginContainer/ButtonsContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(128, 40)
+layout_mode = 2
+text = "Main Menu"
+
+[node name="RestartButton" type="Button" parent="PanelContainer/VBoxContainer/MarginContainer/ButtonsContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(128, 40)
+layout_mode = 2
+text = "Restart"
+
+[node name="ExitButton" type="Button" parent="PanelContainer/VBoxContainer/MarginContainer/ButtonsContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(128, 40)
+layout_mode = 2
+text = "Exit Game"
+
+[node name="ConfirmDialog" parent="." instance=ExtResource("2_6mgxw")]
+unique_name_in_owner = true
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/MarginContainer/ButtonsContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/MarginContainer/ButtonsContainer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/MarginContainer/ButtonsContainer/ExitButton" to="." method="_on_exit_button_pressed"]

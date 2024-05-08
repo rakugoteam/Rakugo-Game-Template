@@ -1,0 +1,43 @@
+[gd_scene load_steps=2 format=3 uid="uid://t2dui8ppm3a4"]
+
+[ext_resource type="Script" path="res://scenes/Credits/RichTextLabel.gd" id="2_clwmv"]
+
+
+[node name="Credits" type="ScrollContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[center][font_size=18][b]Game Credits[/b][/font_size][/center]
+
+[font_size=16][b]Developers[/b][/font_size]
+- Lead Developer: [i]John Smith[/i]
+- Assistant Developer: [i]Emily Johnson[/i]
+- Graphics Designer: [i]Michael Brown[/i]
+- Sound Engineer: [i]Sarah Davis[/i]
+
+[font_size=16][b]Special Thanks[/b][/font_size]
+- Our supportive community for their valuable feedback and suggestions.
+- Friends and family for their unwavering support during development.
+- [i]Special mention to OpenAI for their incredible language model technology![/i]
+
+[font_size=16][b]Legal[/b][/font_size]
+- This game contains assets licensed under Creative Commons and public domain.
+- Some sound effects obtained from [url=https://www.freesound.org/]freesound.org[/url].
+- All rights reserved for original content not explicitly mentioned.
+
+[font_size=14][b] 2024 Rakugo Team. [/b][/font_size]
+"
+fit_content = true
+scroll_active = false
+script = ExtResource("2_clwmv")
+
+[connection signal="meta_clicked" from="RichTextLabel" to="RichTextLabel" method="_on_RichTextLabel_meta_clicked"]

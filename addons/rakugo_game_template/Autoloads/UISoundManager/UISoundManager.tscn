@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cc37235kj4384"]
+
+[ext_resource type="Script" path="res://addons/rakugo_game_template/Autoloads/UISoundManager/UISoundManager.gd" id="1_a0e5f"]
+
+[node name="UISoundManager" type="Node"]
+script = ExtResource("1_a0e5f")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
