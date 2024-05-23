@@ -25,7 +25,6 @@ SceneLoader="*res://addons/rakugo_game_template/Autoloads/SceneLoader.gd"
 ProjectMusicController="*res://addons/rakugo_game_template/Autoloads/ProjectMusicController.tscn"
 UISoundManager="*res://addons/rakugo_game_template/Autoloads/UISoundManager/UISoundManager.tscn"
 Transitions="*res://addons/rakugo_game_template/Autoloads/Transitions/transitions.tscn"
-RGT_Globals="*res://addons/rakugo_game_template/Autoloads/rgt_globals.gd"
 
 [display]
 
