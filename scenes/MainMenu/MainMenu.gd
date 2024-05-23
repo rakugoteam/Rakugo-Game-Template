@@ -64,11 +64,11 @@ func _ready():
 		for button in menu_button_list:
 			button.alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	
-	if ProjectSettings.get_setting(RakugoGameTemplate.loading_scene_setting_path).is_empty():
+	if RGT_Globals.loading_scene_setting.is_empty():
 		play_button.hide()
 
 func _on_play_button_pressed():
-	SceneLoader.change_scene(ProjectSettings.get_setting(RakugoGameTemplate.first_game_scene_setting_path))
+	SceneLoader.change_scene(RGT_Globals.first_game_scene_setting)
 
 func _on_options_button_pressed():
 	_open_sub_menu(option_menu)
