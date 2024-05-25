@@ -123,7 +123,7 @@ func change_scene(scene_path : String, wait_after_load : bool = true) -> void:
 
 func _ready():
 	set_process(false)
-	set_loading_screen(ProjectSettings.get_setting(RakugoGameTemplate.loading_scene_setting_path))
+	set_loading_screen(RGT_Globals.loading_scene_setting)
 
 func _process(_delta):
 	if not _scene_loading_complete:

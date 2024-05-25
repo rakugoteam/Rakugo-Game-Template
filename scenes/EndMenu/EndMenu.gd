@@ -36,7 +36,7 @@ func _on_confirm_restart_confirmed():
 
 func _on_confirm_main_menu_confirmed():
 	hide()
-	SceneLoader.change_scene(ProjectSettings.get_setting(RakugoGameTemplate.main_menu_setting_path))
+	SceneLoader.change_scene(RGT_Globals.main_menu_setting)
 
 func _on_confirm_exit_confirmed():
 	get_tree().quit()
