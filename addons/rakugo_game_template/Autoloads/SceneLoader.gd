@@ -10,7 +10,7 @@ var _loaded_resource : Resource
 
 var _scene_loading_complete : bool = false
 var _background_loading : bool
-var _wait_after_load : bool = true
+var _force_wait_after_load : bool = true
 
 func _check_scene_path() -> bool:
 	if _scene_path == null or _scene_path == "":
@@ -38,12 +38,13 @@ func get_resource():
 		_loaded_resource = current_loaded_resource
 	return _loaded_resource
 
-func change_scene_to_resource() -> void:
+func change_scene_to_resource(open_transition:bool = true) -> void:
 	var current_tree = get_tree()
 	current_tree.paused = true
 	
-	Transitions.transition(Transitions.transition_type.Diamond)
-	await Transitions.animation_player.animation_finished
+	if open_transition:
+		Transitions.transition(Transitions.transition_type.Diamond)
+		await Transitions.animation_player.animation_finished
 	
 	var err = current_tree.change_scene_to_packed(get_resource())
 	if err:
@@ -55,10 +56,13 @@ func change_scene_to_resource() -> void:
 	
 	current_tree.paused = false
 
-func change_scene_to_loading_screen() -> void:
+func change_scene_to_loading_screen(open_transition:bool = true) -> void:
 	get_tree().paused = true
-	Transitions.transition(Transitions.transition_type.Diamond)
-	await Transitions.animation_player.animation_finished
+	
+	if open_transition:
+		Transitions.transition(Transitions.transition_type.Diamond)
+		await Transitions.animation_player.animation_finished
+	
 	var err = get_tree().call_deferred("change_scene_to_packed", _loading_screen)
 	if err:
 		push_error("failed to change scenes to loading screen: %d" % err)
@@ -103,23 +107,23 @@ func load_scene_in_background(scene_path : String):
 	ResourceLoader.load_threaded_request(_scene_path)
 	set_process(true)
 
-func change_scene(scene_path : String, wait_after_load : bool = true) -> void:
+func change_scene(scene_path : String, force_wait_after_load : bool = true, open_transition:bool = true) -> void:
 	if scene_path == null or scene_path.is_empty():
 		push_error("no path given to load")
 		return
 	_scene_path = scene_path
 	_scene_loading_complete = false
-	_wait_after_load = wait_after_load
+	_force_wait_after_load = force_wait_after_load
 	if ResourceLoader.has_cached(scene_path):
 		_scene_loading_complete = true
 		call_deferred("emit_signal", "scene_loaded")
-		if _wait_after_load:
-			change_scene_to_loading_screen()
+		if _force_wait_after_load:
+			change_scene_to_loading_screen(open_transition)
 			return
-		change_scene_to_resource()
+		change_scene_to_resource(open_transition)
 		return
 	ResourceLoader.load_threaded_request(_scene_path)
-	change_scene_to_loading_screen()
+	change_scene_to_loading_screen(open_transition)
 
 func _ready():
 	set_process(false)
@@ -137,11 +141,11 @@ func _process(_delta):
 				if _background_loading:
 					set_process(false)
 					return
-				elif not _wait_after_load:
+				elif not _force_wait_after_load:
 					change_scene_to_resource()
 					set_process(false)
 					return
-	elif _wait_after_load and Input.is_anything_pressed():
+	elif _force_wait_after_load and Input.is_anything_pressed():
 		change_scene_to_resource()
 		set_process(false)
 		return

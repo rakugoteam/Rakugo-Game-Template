@@ -31,7 +31,7 @@ func _process(_delta):
 			if new_progress > progress_bar.value:
 				progress_bar.value = new_progress
 		ResourceLoader.THREAD_LOAD_LOADED:
-			if SceneLoader._wait_after_load:
+			if SceneLoader._force_wait_after_load:
 				progress_bar.value = progress_bar.max_value
 				status_label.text = LOADING_COMPLETE_TEXT
 				continue_label.text = CONTINUE_LABEL_TEXT
