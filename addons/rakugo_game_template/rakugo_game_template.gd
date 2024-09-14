@@ -13,14 +13,32 @@ func _enter_tree():
 		RGT_Globals.loading_scene_setting_path,
 		"res://scenes/LoadingScreen/LoadingScreen.tscn"
 	)
+	
+	ProjectSettings.add_property_info({
+		"name":RGT_Globals.loading_scene_setting_path,
+		"type":TYPE_STRING,
+		"hint":PROPERTY_HINT_FILE,
+		"hint_string":"*.tscn"})
 		
 	PluginHelper.create_or_init_settings_if_empty(
 		RGT_Globals.main_menu_setting_path, "res://scenes/MainMenu/MainMenu.tscn"
 	)
+	
+	ProjectSettings.add_property_info({
+		"name":RGT_Globals.main_menu_setting_path,
+		"type":TYPE_STRING,
+		"hint":PROPERTY_HINT_FILE,
+		"hint_string":"*.tscn"})
 
 	PluginHelper.create_or_init_settings_if_empty(
 		RGT_Globals.first_game_scene_setting_path, "res://scenes/Game/game.tscn"
 	)
+	
+	ProjectSettings.add_property_info({
+		"name":RGT_Globals.first_game_scene_setting_path,
+		"type":TYPE_STRING,
+		"hint":PROPERTY_HINT_FILE,
+		"hint_string":"*.tscn"})
 
 func _exit_tree():
 	remove_autoload_singleton("AppSettings")
