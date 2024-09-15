@@ -1,8 +1,6 @@
 class_name MainMenu
 extends Control
 
-@export var version_number : String = '0.0.0'
-
 var sub_menu
 
 # Position : margin
@@ -53,7 +51,7 @@ func _ready():
 	else:
 		confirm_popup.get_ok_button().pressed.connect(_on_exit_confirmed)
 		
-	%VersionNumber.text = "version : %s" % version_number
+	%VersionNumber.text = "version : " + str(ProjectSettings.get_setting("application/config/version", ""))
 	
 	if Template_position=="Right" :
 		header_margin.size_flags_horizontal  = SIZE_SHRINK_END
