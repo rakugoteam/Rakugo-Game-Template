@@ -23,4 +23,3 @@ func _exit_tree():
 	RGT_Globals.loading_scene_setting = null
 	RGT_Globals.main_menu_setting = null
 	RGT_Globals.first_game_scene_setting = null
-
