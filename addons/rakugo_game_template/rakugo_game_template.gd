@@ -9,9 +9,18 @@ func _enter_tree():
 	add_autoload_singleton("UISoundManager", "res://addons/rakugo_game_template/Autoloads/UISoundManager/UISoundManager.tscn")
 	add_autoload_singleton("Transitions", "res://addons/rakugo_game_template/Autoloads/Transitions/transitions.tscn")
 
-	RGT_Globals.loading_scene_setting = "res://scenes/LoadingScreen/LoadingScreen.tscn"
-	RGT_Globals.main_menu_setting = "res://scenes/MainMenu/MainMenu.tscn"
-	RGT_Globals.first_game_scene_setting = "res://scenes/Game/game.tscn"
+	PluginHelper.create_or_init_settings_if_empty(
+		RGT_Globals.loading_scene_setting_path,
+		"res://scenes/LoadingScreen/LoadingScreen.tscn"
+	)
+		
+	PluginHelper.create_or_init_settings_if_empty(
+		RGT_Globals.main_menu_setting_path, "res://scenes/MainMenu/MainMenu.tscn"
+	)
+
+	PluginHelper.create_or_init_settings_if_empty(
+		RGT_Globals.first_game_scene_setting_path, "res://scenes/Game/game.tscn"
+	)
 
 func _exit_tree():
 	remove_autoload_singleton("AppSettings")
