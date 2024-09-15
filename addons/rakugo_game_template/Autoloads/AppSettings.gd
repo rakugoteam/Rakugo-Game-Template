@@ -9,6 +9,7 @@ const VIDEO_SECTION = 'VideoSettings'
 
 const FULLSCREEN_ENABLED = 'FullscreenEnabled'
 const SCREEN_RESOLUTION = 'ScreenResolution'
+const GUI_SCALE = 'GuiScale'
 const MUTE_SETTING = 'Mute'
 const BUSSES_VOLUME = 'BussesVolume'
 const MASTER_BUS_INDEX = 0
@@ -61,6 +62,9 @@ func _ready():
 			
 			if main_window.mode != Window.MODE_EXCLUSIVE_FULLSCREEN:
 				main_window.size = res_value
+				
+		if config_file.has_section_key(VIDEO_SECTION, GUI_SCALE):
+			main_window.content_scale_factor = config_file.get_value(VIDEO_SECTION, GUI_SCALE)
 
 func save_config_file():
 	config_file.save(CONFIG_FILE_LOCATION)
@@ -112,3 +116,10 @@ func set_resolution(value : Vector2i) -> void:
 		main_window.size = value
 		
 	config_file.set_value(VIDEO_SECTION, SCREEN_RESOLUTION, value)
+
+func set_gui_scale(value:float) -> void:
+	var main_window = get_window()
+	
+	main_window.content_scale_factor = value
+
+	config_file.set_value(VIDEO_SECTION, GUI_SCALE, value)

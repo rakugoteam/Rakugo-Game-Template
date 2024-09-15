@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://b2numvphf2kau"]
+[gd_scene load_steps=3 format=3 uid="uid://b2numvphf2kau"]
 
 [ext_resource type="Script" path="res://scenes/OptionsMenu/Video/VideoOptionsMenu.gd" id="1"]
+[ext_resource type="Script" path="res://scenes/OptionsMenu/Video/HSliderLabel.gd" id="2_68rjp"]
 
 [node name="VideoOptionsMenu" type="VBoxContainer"]
 custom_minimum_size = Vector2(400, 0)
@@ -29,6 +30,9 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 2
 
+[node name="HSeparator" type="HSeparator" parent="."]
+layout_mode = 2
+
 [node name="ResolutionControl" type="HBoxContainer" parent="."]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
@@ -45,5 +49,67 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="ScaleContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="ScaleContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Scale :"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="ScaleContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScaleContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="HSliderLabel" type="Label" parent="ScaleContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+text = "x1"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("2_68rjp")
+
+[node name="GuiScaleHSlider" type="HSlider" parent="ScaleContainer/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 0.5
+max_value = 4.0
+step = 0.5
+value = 1.0
+tick_count = 8
+ticks_on_borders = true
+
+[node name="ApplyButton" type="Button" parent="."]
+layout_mode = 2
+disabled = true
+text = "Apply"
+
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
+initial_position = 2
+size = Vector2i(376, 100)
+popup_window = true
+dialog_text = "Are you sure you want to keep those settings ?"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
 [connection signal="toggled" from="FullscreenControl/FullscreenButton" to="." method="_on_fullscreen_button_toggled"]
 [connection signal="item_selected" from="ResolutionControl/ResolutionOptions" to="." method="_on_resolution_options_item_selected"]
+[connection signal="value_changed" from="ScaleContainer/MarginContainer/HBoxContainer/GuiScaleHSlider" to="." method="_on_gui_scale_h_slider_value_changed"]
+[connection signal="value_changed" from="ScaleContainer/MarginContainer/HBoxContainer/GuiScaleHSlider" to="ScaleContainer/MarginContainer/HBoxContainer/HSliderLabel" method="_on_h_slider_value_changed"]
+[connection signal="pressed" from="ApplyButton" to="." method="_on_apply_button_pressed"]
+[connection signal="canceled" from="ConfirmationDialog" to="." method="_on_confirmation_dialog_canceled"]
+[connection signal="confirmed" from="ConfirmationDialog" to="." method="_on_confirmation_dialog_confirmed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
