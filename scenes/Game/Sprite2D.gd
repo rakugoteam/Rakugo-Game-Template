@@ -4,5 +4,5 @@ extends Sprite2D
 #I permit to see if the pause is effective
 
 func _process(delta):
-	rotate(delta)
+	rotate(delta / 2.0)
 	pass

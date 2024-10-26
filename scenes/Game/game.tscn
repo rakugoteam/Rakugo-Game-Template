@@ -56,5 +56,6 @@ position = Vector2(637, 143)
 texture = ExtResource("3_6luik")
 script = ExtResource("4_lltyx")
 
+[connection signal="ask_to_save" from="GUI/PauseMenu" to="." method="_on_pause_menu_ask_to_save"]
 [connection signal="pressed" from="RemoveMe/HBoxContainer/WinButton" to="." method="_on_win"]
 [connection signal="pressed" from="RemoveMe/HBoxContainer/LooseButton" to="." method="_on_gameover"]

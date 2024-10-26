@@ -57,6 +57,12 @@ custom_minimum_size = Vector2(128, 40)
 layout_mode = 2
 text = "Resume"
 
+[node name="SaveButton" type="Button" parent="MenuContainer/VBoxContainer/MenuButtons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(128, 40)
+layout_mode = 2
+text = "Save"
+
 [node name="RestartButton" type="Button" parent="MenuContainer/VBoxContainer/MenuButtons"]
 custom_minimum_size = Vector2(128, 40)
 layout_mode = 2
@@ -128,10 +134,15 @@ custom_minimum_size = Vector2(62, 40)
 layout_mode = 2
 text = "Back"
 
+[node name="AcceptDialog" type="AcceptDialog" parent="."]
+unique_name_in_owner = true
+
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="pressed" from="MenuContainer/VBoxContainer/MenuButtons/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="MenuContainer/VBoxContainer/MenuButtons/SaveButton" to="." method="_on_save_button_pressed"]
 [connection signal="pressed" from="MenuContainer/VBoxContainer/MenuButtons/RestartButton" to="." method="_on_restart_button_pressed"]
 [connection signal="pressed" from="MenuContainer/VBoxContainer/MenuButtons/OptionsButton" to="." method="_on_options_button_pressed"]
 [connection signal="pressed" from="MenuContainer/VBoxContainer/MenuButtons/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
 [connection signal="pressed" from="MenuContainer/VBoxContainer/MenuButtons/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="SubMenuContainer/VBoxContainer/MarginContainer2/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="confirmed" from="AcceptDialog" to="." method="_on_accept_dialog_confirmed"]
