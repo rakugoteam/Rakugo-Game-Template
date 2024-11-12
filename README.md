@@ -27,13 +27,13 @@ Inspired by the [GGT](https://github.com/crystal-bit/godot-game-template/tree/ma
 
 ### If you want to create a new project with it
 
-1. Download the last [release]()
+1. Download the last [release](https://github.com/rakugoteam/Rakugo-Game-Template/releases/latest)
 1. Unzip the archive
 1. Import the project from the [Godot](https://godotengine.org) Project Manager
 
 ### If you have already a project
 
-1. Download the last [release]()
+1. Download the last [release](https://github.com/rakugoteam/Rakugo-Game-Template/releases/latest)
 1. Unzip the archive
 1. Copy the addons/RakugoGameTemplate folder in your project folder
 1. In the scenes folder, copy what you are interested in
