@@ -22,8 +22,7 @@ var current_save_panel:Node = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	if SaveHelper.save_file_names.is_empty():
-		SaveHelper.update_save_file_names()
+	SaveHelper.update_save_file_names()
 	
 	if SaveHelper.save_file_names.is_empty():
 		push_warning("No save to load")
