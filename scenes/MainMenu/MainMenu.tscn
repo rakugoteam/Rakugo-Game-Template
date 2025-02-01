@@ -116,14 +116,12 @@ text = "Load"
 alignment = 0
 
 [node name="OptionsButton" type="Button" parent="VBoxContainer/MarginContainer/HBoxContainer/MenuButtons"]
-unique_name_in_owner = true
 layout_mode = 2
 text = "Options
 "
 alignment = 0
 
 [node name="CreditsButton" type="Button" parent="VBoxContainer/MarginContainer/HBoxContainer/MenuButtons"]
-unique_name_in_owner = true
 layout_mode = 2
 text = "Credits"
 alignment = 0
