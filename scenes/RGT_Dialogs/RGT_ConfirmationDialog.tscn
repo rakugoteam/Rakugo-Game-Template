@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dnlyj8r7kuvas"]
+
+[ext_resource type="Script" path="res://scenes/RGT_Dialogs/RGT_ConfirmationDialog.gd" id="1_vflp3"]
+
+[node name="RGT_ConfirmationDialog" type="ConfirmationDialog"]
+initial_position = 2
+unresizable = true
+script = ExtResource("1_vflp3")

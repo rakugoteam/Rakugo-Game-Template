@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cy4anjja2feca"]
+
+[ext_resource type="Script" path="res://scenes/RGT_Dialogs/RGT_YesNoDialog.gd" id="1_x25fm"]
+
+[node name="RGT_YesNoDialog" type="ConfirmationDialog"]
+unresizable = true
+ok_button_text = "Yes"
+script = ExtResource("1_x25fm")
