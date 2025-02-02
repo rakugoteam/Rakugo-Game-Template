@@ -39,8 +39,6 @@ func _ready():
 	
 	if RGT_Globals.loading_scene_setting.is_empty():
 		play_button.hide()
-		
-	SaveHelper.update_save_file_names()
 	
 	if SaveHelper.save_file_names.is_empty():
 		continue_button.hide()
